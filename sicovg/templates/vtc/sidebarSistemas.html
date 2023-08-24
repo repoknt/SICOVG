@@ -1,0 +1,81 @@
+{% load static %}
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+    <a href="#" class="brand-link">
+        <img src="{% static 'img/logoSicov.png' %}"
+             alt="SICOV"
+             class="brand-image"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">SICOV</span>
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                {#                <img src="{{ request.user.get_image }}" class="img-circle" alt="User Image">#}
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{ request.user.username }}</a>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-header">Menú</li>
+                <li class="nav-item">
+                        <a href="{% url 'chatbot:chatbot' %}" class="nav-link">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>
+                                Chatbot
+                            </p>
+                        </a>
+                </li>
+                <li>
+                    <a href="{% url 'rh:vistavs' %}" class="nav-link">
+                        <i class="fas fa-list-alt"></i>
+                        <p>
+                            Avs
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'rh:calendario' %}" class="nav-link">
+                        <i class="fas fa-calendar"></i>
+                        <p>
+                            Calendario KN-T
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'rh:computadoras_list' %}" class="nav-link">
+                        <i class="fas fa-laptop"></i>
+                        <p>
+                            Computadoras
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'erp:incidenciashis' %}" class="nav-link">
+                        <i class="fas fa-history"></i>
+                        <p>
+                            Historial Pendientes
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'rh:inventariodatos' %}" class="nav-link">
+                        <i class="fas fa-cash-register"></i>
+                        <p>
+                            Inventario
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'erp:incidenciaslist' %}" class="nav-link">
+                        <i class="fas fa-list-ol"></i>
+                        <p>
+                            Pendientes
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>

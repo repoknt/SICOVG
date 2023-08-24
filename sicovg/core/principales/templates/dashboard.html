@@ -1,0 +1,185 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/bootstrap-4.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/toastr-2.1.4/toastr/toastr.css' %}">
+    <script type="text/javascript" src="{% static 'lib/toastr-2.1.4/toastr/toastr.js' %}"></script>
+    {#    Lobrerías de gráfica #}
+    <script src="{% static 'lib/highcharts-8.1.2/highcharts.js' %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/exporting.js' %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/export-data.js' %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/accessibility.js' %}"></script>
+    <script src="{% static 'lib/toastr-2.1.4/JS/notificacionesGenerales.js' %}"></script>
+{% endblock %}
+
+{% block encabezadoBienvenida %}
+    <div class="row">
+        <div class="col-sm-8">
+            <h3 class="m-0 text-dark"> Bienvenido <small>{{ request.user.get_full_name }}</small>
+            </h3>
+        </div>
+        <div class="col-sm-4">
+            <ol class="breadcrumb float-sm-right">
+                {#                                <li class="breadcrumb-item"><a href="{% url 'principales:dashboard' %}">Home</a></li>#}
+                <li class="breadcrumb-item"><a href="{{ list_url }}">{{ entity }}</a></li>
+            </ol>
+        </div>
+    </div>
+    <input type="hidden" value="{{ NotiPermisos }}" name="NotiPermisos" id="NotiPermisos">
+    <hr>
+    {% if request.user.tipoEmpleado.upper == 'VENTAS' %}
+        <script>
+            window.location.href = "/erp/empresa/ver/";
+        </script>
+    {% endif %}
+    <!-- Small boxes (Stat box) -->
+    {% if request.user.tipoEmpleado != 'MESA DE CONTROL' and  request.user.tipoEmpleado != 'RH' %}
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                    <span class="info-box-icon col-bluest elevation-1"><i class="fas fa-clipboard-check"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Ingreso</span>
+                        <span class="info-box-number">{{ estatus.ingreso }}</span>
+                    </div>
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon col-greent elevation-1"><i class="fas fa-file-invoice-dollar"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Facturada</span>
+                        <span class="info-box-number">{{ estatus.facturada }}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon col-yellowt elevation-1"><i class="fas fa-sync-alt"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Rechazo de Almacen</span>
+                        <span class="info-box-number">{{ estatus.almacen }}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon col-redt elevation-1"><i class="fas fa-exclamation-triangle"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Rechazo de Mesa</span>
+                        <span class="info-box-number">{{ estatus.mesa }}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon btn-dark elevation-1"><i class="fas fa-file-download"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Contrato enviado</span>
+                        <span class="info-box-number">{{ estatus.contratoEnviado }}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+        </div>
+    {% endif %}
+    {% if request.user.tipoEmpleado.upper == "ADMINISTRADOR" or "ADMINISTRADOR_TOLUCA" or request.user.tipoEmpleado.upper == "MESA DE CONTROL" %}
+        <figure class="highcharts-figure">
+            <div id="container"></div>
+            <script type="application/javascript">
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Gráfica General de Estatus'
+                    },
+                    xAxis: {
+                        categories: [
+                            'Estatus'
+                        ],
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Total de Cuentas'
+                        }
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.1f} Cuentas</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.2,
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: 'Rechazo de Mesa de Control',
+                        data: [{{estatusG.rechazoMesaG}}]
+
+                    }, {
+                        name: 'Abiertas',
+                        data: [{{estatusG.abiertaG}}]
+
+                    }, {
+                        name: 'Ingreso',
+                        data: [{{estatusG.ingresoG}}]
+
+                    }, {
+                        name: 'Validación de Producto',
+                        data: [{{estatusG.validacionDeProductoG}}]
+
+                    }, {
+                        name: 'Validación de Crédito',
+                        data: [{{estatusG.validacionCreditoG}}]
+
+                    }, {
+                        name: 'Rechazo de Crédito',
+                        data: [{{estatusG.rechazoDeCreditoG}}]
+
+                    }, {
+                        name: 'Almacén',
+                        data: [{{estatusG.almacenG}}]
+
+                    }, {
+                        name: 'Rechazo de Almacén',
+                        data: [{{estatusG.almacenG}}]
+
+                    }, {
+                        name: 'Facturada',
+                        data: [{{estatusG.facturadaG}}]
+
+                    }]
+                });
+            </script>
+        </figure>
+    {% endif %}
+{% endblock %}
