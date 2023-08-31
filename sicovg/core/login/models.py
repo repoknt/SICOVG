@@ -35,9 +35,6 @@ class CodigosPostales(models.Model):
         item['id'] = self.idCodigoPostal
         return item
 
-def upload_path_handler(instance, filename):
-    return "foto/{}".format(filename)
-
 
 
 
@@ -51,16 +48,10 @@ class User(AbstractUser):
     municipio = models.CharField(verbose_name='Municipio', max_length=128, null=True, blank=True)
     estado = models.CharField(verbose_name='Estado', max_length=64, null=True, blank=True)
     colonia = models.CharField(verbose_name='Colonia', max_length=128, null=True, blank=True)
-    telefonoTrabajo = models.CharField(max_length=10, verbose_name='Telefono de trabajo', null=True)
     tipoEmpleado = models.CharField(max_length=25, choices=user_choices, default='Ejecutivo',
                                     verbose_name='Tipo de Empleado')
-    genero = models.CharField(max_length=10, choices=gender_choices, default='Hombre', verbose_name='Genero')
     telefonoPersonal = models.CharField(max_length=10, verbose_name='Telefono personal', null=True)
-    curp = models.CharField(max_length=18, verbose_name='CURP', unique=True, null=True, blank=True)
     fechaNacimiento = models.DateField(default=datetime.now, verbose_name='Fecha de nacimiento', null=True, blank=True)
-    edad = models.IntegerField(verbose_name='Edad', default=18, blank=True)
-    telefonoEmergencia = models.CharField(max_length=10, verbose_name='Telefono de Emergencia', null=True, blank=True)
-    nombreReferencia = models.CharField(max_length=64, verbose_name='Nombre De Referencia', null=True, blank=True)
     parentesco = models.CharField(max_length=64, verbose_name='Parentesco', null=True, blank=True)
     token = models.UUIDField(primary_key=False, editable=False, null=True, blank=True)
     generated_username = models.CharField(max_length=100, blank=True)
