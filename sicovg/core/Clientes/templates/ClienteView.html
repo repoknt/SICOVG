@@ -1,18 +1,21 @@
 {% extends 'list.html' %}
 {% load static %}
 {% block head_list %}
-    <script src="{% static 'user/js/list.js' %}"></script>
+    <script src="{% static 'js/list.js' %}"></script>
 {% endblock %}
 {% block columns %}
     <tr>
-        <th scope="col" style="width: 5%;">Nro</th>
-        <th scope="col" style="width: 20%;">Nombres</th>
-        <th scope="col" style="width: 20%;">Apellidos</th>
-        <th scope="col" style="width: 20%;">UserName</th>
-        <th scope="col" style="width: 20%;">Tipo Usuario</th>
-        <th scope="col" style="width: 20%;">Contraseña</th>
-        <th scope="col" style="width: 15%;">Expediente</th>
-        <th scope="col" style="width: 15%;">Opciones</th>
+        <th scope="col" style="width: 3%;">Nro</th>
+        <th scope="col" style="width: 25%;">Razon Social</th>
+        <th scope="col" style="width: 15%;">RFC</th>
+        <th scope="col" style="width: 10%;">Codigo Postal</th>
+        <th scope="col" style="width: 15%;">Calle</th>
+        <th scope="col" style="width: 10%;">Estado</th>
+        <th scope="col" style="width: 15%;">Municipio</th>
+        <th scope="col" style="width: 15%;">Colonia</th>
+        <th scope="col" style="width: 15%;">Email</th>
+        <th scope="col" style="width: 15%;">Telefono</th>
+        <th scope="col" style="width: 10%;">Acciones</th>
     </tr>
 {% endblock %}
 

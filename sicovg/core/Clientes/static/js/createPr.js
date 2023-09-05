@@ -50,7 +50,7 @@ $(function () {
                     icon: 'success',
                     timer: 2000,
                     onClose: () => {
-                        location.href = '/Clientes/List/';
+                        location.href = '/Proovedores/List/';
                     }
                 });
             });
