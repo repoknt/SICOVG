@@ -39,7 +39,8 @@ $(function () {
     }
 
     $('form').on('submit', function (e) {
-        e.preventDefault();
+    e.preventDefault();
+    console.log('Form submitted');
         var parameters = new FormData(this);
         if (validarFormulario()) {
             submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
