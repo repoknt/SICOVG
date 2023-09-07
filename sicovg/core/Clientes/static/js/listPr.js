@@ -26,18 +26,19 @@ $(function () {
             {"data": "municipio"},
             {"data": "estado"},
             {"data": "colonia"},
+            {"data": "representanteLegal"},
             {"data": "email"},
             {"data": "telefono"},
         ],
         columnDefs: [
             {
-                targets: [9],
+                targets: [10],
                 class: 'text-center',
                 orderable: false,
 
             },
             {
-                targets: [10],
+                targets: [11],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {

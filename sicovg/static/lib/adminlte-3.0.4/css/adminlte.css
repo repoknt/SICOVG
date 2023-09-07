@@ -4779,9 +4779,9 @@ input[type="button"].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
   background-clip: border-box;
-  border: 0 solid rgba(0, 0, 0, 0.125);
+  border: 2px solid #00d7b2;
   border-radius: 0.25rem;
 }
 
@@ -20231,7 +20231,10 @@ html.maximized-card {
 
 .login-card-body,
 .register-card-body {
-  background: #ffffff;
+  
+  background: transparent; /* Fondo transparente */
+ 
+  border-radius: 10px; /* Esquinas redondeadas */
   border-top: 0;
   color: #666;
   padding: 20px;
@@ -20287,6 +20290,9 @@ html.maximized-card {
   margin: 0;
   padding: 0 20px 20px;
   text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .social-auth-links {

@@ -26,7 +26,8 @@ class ClienteView(LoginRequiredMixin, TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
 
-        # la sobreescritura del metodo post, es para personalizar lo que queremos que haga la accion
+        # la sobreescritura del metodo post, es para personalizar lo que queremos que haga la acción
+
     def post(self, request, *args, **kwargs):
         data = {}
         try:

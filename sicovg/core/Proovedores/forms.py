@@ -5,7 +5,7 @@ from django.forms import *
 from core.principales.models import Proovedor
 
 
-class ProovedorForm(ModelForm):
+class PrForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.fields['codigoPostal'].queryset = CodigosPostales.objects.first()

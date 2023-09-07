@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, TemplateView, UpdateView, DeleteView
-from core.Proovedores.forms import ProovedorForm
+from core.Proovedores.forms import PrForm
 from core.principales.models import Proovedor
 from core.login.models import CodigosPostales
 
@@ -55,7 +55,7 @@ def page_not_found404(request, exception):
 class ProovedorCreateView(LoginRequiredMixin, CreateView):
     model = Proovedor
     template_name = 'Create_proovedor.html'
-    form_class = ProovedorForm
+    form_class = PrForm
     success_url = reverse_lazy('Proovedores:List')
     url_redirect = success_url
 
@@ -100,9 +100,9 @@ class ProovedorCreateView(LoginRequiredMixin, CreateView):
 
 class ProovedorUpdateView(LoginRequiredMixin, UpdateView):
     model = Proovedor
-    form_class = ProovedorForm
+    form_class = PrForm
     template_name = 'Create_proovedor.html'
-    success_url = reverse_lazy('Proovedores:Update')
+    success_url = reverse_lazy('Proovedores:Create')
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
@@ -117,7 +117,6 @@ class ProovedorUpdateView(LoginRequiredMixin, UpdateView):
             if action == 'edit':
                 instance = self.get_object()
                 form = self.get_form()
-                # Populate the form with the submitted data and save the instance
                 form.instance = instance
                 data = form.save()
             elif action == 'search_cp':
@@ -140,14 +139,14 @@ class ProovedorUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Edición de Proovedor'
-        context['entity'] = 'Proovedor'
+        context['entity'] = 'Proovedores'
         context['list_url'] = self.success_url
         context['action'] = 'edit'
         return context
 
 
 class ProovedorDeleteView(LoginRequiredMixin, DeleteView):
-    model = ProovedorForm
+    model = Proovedor
     template_name = 'Delete_Proovedor.html'
     success_url = reverse_lazy('Proovedores:List')
     permission_required = 'delete_Proovedor'
@@ -169,7 +168,7 @@ class ProovedorDeleteView(LoginRequiredMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Eliminación de Proovedores'
-        context['entity'] = 'Usuarios'
+        context['entity'] = 'Proovedores'
         context['list_url'] = self.success_url
         context['success_url'] = self.success_url
         return context
