@@ -21,6 +21,7 @@ $(function () {
             {"data": "id"},
             {"data": "razonSocial"},
             {"data": "RFC"},
+            {"data": "cuenta"},
             {"data": "codigoPostal"},
             {"data": "calle"},
             {"data": "estado"},
@@ -41,8 +42,8 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    var buttons = '<a href="/Clientes/Update/' + row.id + '/" class="btn btn-warning btn-xs btn-flat"><i class="fas-col fas fa-edit"></i></a> ';
-                    buttons += '<a href="/Clientes/Delete/' + row.id + '/" rel="delete" title="Eliminar usu" type="button" class="btn btn-danger btn-xs btn-flat"><i class="fas-col fas fa-trash-alt"></i></a>';
+                    var buttons = '<a href="/Proovedores/Update/' + row.id + '/" class="btn btn-warning btn-xs btn-flat"><i class="fas-col fas fa-edit"></i></a> ';
+                    buttons += '<a href="/Proovedores/Delete/' + row.id + '/" rel="delete" title="Eliminar usu" type="button" class="btn btn-danger btn-xs btn-flat"><i class="fas-col fas fa-trash-alt"></i></a>';
                     return buttons;
                 }
             },

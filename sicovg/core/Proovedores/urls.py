@@ -1,13 +1,12 @@
 from django.urls import path
 
-from core.Proovedores.ProovedorViews.views import ProovedorView, ProovedorCreateView, ProovedorUpdateView, ProovedorDeleteView
+from core.Proovedores.views import ProovedorView, ProovedorCreateView, ProovedorUpdateView, ProovedorDeleteView
 
 app_name = 'Proovedores'
 
 urlpatterns = [
-    path('List/', ProovedorView.as_view(), name='Proovedor'),
-    path('Create/', ProovedorCreateView.as_view(), name='CreatePr'),
-    path('Update/<int:pk>/', ProovedorUpdateView.as_view(), name='UpdatePr'),
-    path('Delete/<int:pk>/', ProovedorDeleteView.as_view(), name='DeletePr'),
-
+    path('List/', ProovedorView.as_view(), name='List'),
+    path('Create/', ProovedorCreateView.as_view(), name='Create'),
+    path('Update/<int:pk>/', ProovedorUpdateView.as_view(), name='Update'),
+    path('Delete/<int:pk>/', ProovedorDeleteView.as_view(), name='Delete'),
 ]

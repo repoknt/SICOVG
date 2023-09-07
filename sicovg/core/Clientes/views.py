@@ -99,7 +99,7 @@ class ClienteCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Creación de Usuario'
+        context['title'] = 'Creación de Cliente'
         context['entity'] = 'Clientes'
         context['list_url'] = self.success_url
         context['action'] = 'add'
@@ -126,7 +126,6 @@ class ClienteUpdateView(LoginRequiredMixin, UpdateView):
             if action == 'edit':
                 instance = self.get_object()
                 form = self.get_form()
-                # Populate the form with the submitted data and save the instance
                 form.instance = instance
                 data = form.save()
             elif action == 'search_cp':

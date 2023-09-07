@@ -21,9 +21,6 @@ class ProovedorView(LoginRequiredMixin, TemplateView):
         self.usuario = request.user
         return super().dispatch(request, *args, **kwargs)
 
-
-        # la sobreescritura del metodo post, es para personalizar lo que queremos que haga la acción
-
     def post(self, request, *args, **kwargs):
         data = {}
         try:
@@ -47,7 +44,7 @@ class ProovedorView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Lista de Proovedores'
-        context['create_url'] = reverse_lazy('Clientes:Create_cliente')
+        context['create_url'] = reverse_lazy('Proovedores:Create')
         return context
 
 
@@ -58,9 +55,8 @@ def page_not_found404(request, exception):
 class ProovedorCreateView(LoginRequiredMixin, CreateView):
     model = Proovedor
     template_name = 'Create_proovedor.html'
-    # Formulario que ocuparemos en la vista
     form_class = ProovedorForm
-    success_url = reverse_lazy('Proovedores:CreatePr')
+    success_url = reverse_lazy('Proovedores:List')
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
@@ -99,7 +95,6 @@ class ProovedorCreateView(LoginRequiredMixin, CreateView):
         context['entity'] = 'Proovedores'
         context['list_url'] = self.success_url
         context['action'] = 'add'
-        # context['administrativos'] = User.objects.filter(tipoEmpleado__contains='or')
         return context
 
 
