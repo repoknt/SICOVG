@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core.login',
     'core.principales',
     'core.Clientes',
+    'core.Proovedores',
 ]
 
 MIDDLEWARE = [

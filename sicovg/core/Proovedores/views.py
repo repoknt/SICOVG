@@ -102,7 +102,7 @@ class ProovedorUpdateView(LoginRequiredMixin, UpdateView):
     model = Proovedor
     form_class = ProovedorForm
     template_name = 'Create_proovedor.html'
-    success_url = reverse_lazy('Proovedores:UpdatePr')
+    success_url = reverse_lazy('Proovedores:Update')
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)
@@ -139,8 +139,8 @@ class ProovedorUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Edición de Clientes'
-        context['entity'] = 'Clientes'
+        context['title'] = 'Edición de Proovedor'
+        context['entity'] = 'Proovedor'
         context['list_url'] = self.success_url
         context['action'] = 'edit'
         return context
@@ -149,8 +149,8 @@ class ProovedorUpdateView(LoginRequiredMixin, UpdateView):
 class ProovedorDeleteView(LoginRequiredMixin, DeleteView):
     model = ProovedorForm
     template_name = 'Delete_Proovedor.html'
-    success_url = reverse_lazy('Clientes:Cliente')
-    permission_required = 'delete_Cliente'
+    success_url = reverse_lazy('Proovedores:List')
+    permission_required = 'delete_Proovedor'
     url_redirect = success_url
 
     def dispatch(self, request, *args, **kwargs):
@@ -160,18 +160,15 @@ class ProovedorDeleteView(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         data = {}
         try:
-            # Get the object to be deleted
             Proovedores = Proovedor.objects.get(pk=self.object.id)
             Proovedores.delete()
-            # Guardaremos el usuario
-            Cliente.save()
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Eliminación de Clientes'
+        context['title'] = 'Eliminación de Proovedores'
         context['entity'] = 'Usuarios'
         context['list_url'] = self.success_url
         context['success_url'] = self.success_url

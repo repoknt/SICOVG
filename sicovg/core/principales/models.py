@@ -42,3 +42,7 @@ class Proovedor(models.Model):
         db_table = 'Proovedor'
         verbose_name = 'Proovedor'
         verbose_name_plural = 'Proovedores'
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item

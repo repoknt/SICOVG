@@ -26,8 +26,7 @@ class ClienteView(LoginRequiredMixin, TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
 
-        # la sobreescritura del metodo post, es para personalizar lo que queremos que haga la acción
-
+        # la sobreescritura del metodo post, es para personalizar lo que queremos que haga la accion
     def post(self, request, *args, **kwargs):
         data = {}
         try:
@@ -168,11 +167,8 @@ class ClienteDeleteView(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         data = {}
         try:
-            # Get the object to be deleted
             Cliente = Clientes.objects.get(pk=self.object.id)
             Cliente.delete()
-            # Guardaremos el usuario
-            Cliente.save()
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data)
