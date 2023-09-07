@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   
     <title>{{ title }}</title>
     <link rel="icon" href="{% static 'img/sicov-icon.png' %}" type="image/png"/>
     <!-- Tell the browser to be responsive to screen width -->
@@ -12,7 +13,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static 'lib/adminlte-3.0.4/plugins/font-awesome-5.11.1/css/all.min.css' %}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{% static 'lib/adminlte-3.0.4/css/adminlte.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/adminlte-3.0.4/css/adminlte.css' %}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Sweetalert2 -->
@@ -34,7 +35,8 @@
 
     {% endblock %}
 </head>
-<body class="hold-transition login-page">
+<body  class="hold-transition login-page" style="background-image: url('{% static 'img/rrrr.png' %}'); background-size: cover; background-repeat: no-repeat;">
+    
 {% block content %}
 
 {% endblock %}

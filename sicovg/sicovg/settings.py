@@ -84,7 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         #'NAME': 'sicov_django', #base produccion
-        'NAME': 'sicov--django', #base temporal
+        'NAME': 'sicovg', #base temporal
         #'USER': 'sicov_manager',
         'USER': 'root',
         #'PASSWORD': '$1C0v-m45T3R',
