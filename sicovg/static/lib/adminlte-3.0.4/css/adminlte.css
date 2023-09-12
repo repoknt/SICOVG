@@ -10145,11 +10145,11 @@ a.text-light:hover, a.text-light:focus {
 }
 
 .text-dark {
-  color: #343a40 !important;
+  color: #ffffff !important;
 }
 
 a.text-dark:hover, a.text-dark:focus {
-  color: #121416 !important;
+  color: #ffffff!important;
 }
 
 .text-body {
@@ -11835,7 +11835,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 [class*='sidebar-light'] .user-panel {
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #818092;
 }
 
 .user-panel,
@@ -11989,7 +11989,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 [class*='sidebar-light-'] {
-  background-color: #ffffff;
+  background: linear-gradient(180deg, rgba(11,11,28,1) 52%, rgba(12,10,58,1) 100%);
 }
 
 [class*='sidebar-light-'] .user-panel a:hover {
@@ -12036,11 +12036,11 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 [class*='sidebar-light-'] .nav-header {
   background: inherit;
-  color: #292d32;
+  color: #ffffff;
 }
 
 [class*='sidebar-light-'] .sidebar a {
-  color: #343a40;
+  color: #ffffff;
 }
 
 [class*='sidebar-light-'] .sidebar a:hover {
@@ -13666,7 +13666,7 @@ body.text-sm .control-sidebar {
 }
 
 .navbar-primary {
-  background-color: #007bff;
+  background-color: #3A5075;
 }
 
 .navbar-secondary {
@@ -20291,7 +20291,7 @@ html.maximized-card {
   padding: 0 20px 20px;
   text-align: center;
   color: white;
-  font-weight: bold;
+
   font-size: 18px;
 }
 
