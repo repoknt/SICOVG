@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
+from datetime import datetime
 
 
 class Clientes(models.Model):
@@ -42,6 +43,27 @@ class Proovedor(models.Model):
         db_table = 'Proovedor'
         verbose_name = 'Proovedor'
         verbose_name_plural = 'Proovedores'
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item
+
+
+class Inventario(models.Model):
+    NombresProducto = models.CharField(max_length=100,verbose_name='Nombre Producto', null=False)
+    Descripcion = models.CharField(max_length=200,verbose_name=' Descripcion', null=False)
+    Categoria = models.CharField(max_length=100,verbose_name='Categoria ', null=False)
+    NumeroDeSerie = models.CharField(max_length=20,verbose_name=' Numero De Serie', null=False)
+    CantidadDeStock = models.IntegerField(verbose_name=' Cantidad En Stock', null=False)
+    PrecioUnitario = models.FloatField(max_length=50,verbose_name=' Precio Unitario', null=False)
+    PrecioDeCompra = models.FloatField(max_length=50,verbose_name=' Precio De Compra', null=False)
+    FechaDeCompra = models.DateField(default=datetime.now, verbose_name='Fecha De Compra', null=False)
+    NivelDeReordenamiento = models.IntegerField(verbose_name=' Numero De Ordenamiento ', null=False)
+
+    class Meta:
+        db_table = 'Inventario'
+        verbose_name = 'Inventario'
+        verbose_name_plural = 'Inventarios'
 
     def toJSON(self):
         item = model_to_dict(self)
