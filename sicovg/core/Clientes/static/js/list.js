@@ -21,28 +21,23 @@ $(function () {
             {"data": "id"},
             {"data": "razonSocial"},
             {"data": "RFC"},
-            {"data": "codigoPostal"},
-            {"data": "calle"},
-            {"data": "estado"},
-            {"data": "municipio"},
-            {"data": "colonia"},
             {"data": "email"},
             {"data": "telefono"},
         ],
         columnDefs: [
             {
-                targets: [9],
+                targets: [4],
                 class: 'text-center',
                 orderable: false,
 
             },
             {
-                targets: [10],
+                targets: [5],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    var buttons = '<a href="/Clientes/Update/' + row.id + '/" class="btn btn-warning btn-xs btn-flat"><i class="fas-col fas fa-edit"></i></a> ';
-                    buttons += '<a href="/Clientes/Delete/' + row.id + '/" rel="delete" title="Eliminar usu" type="button" class="btn btn-danger btn-xs btn-flat"><i class="fas-col fas fa-trash-alt"></i></a>';
+                   var buttons = '<a href="/Clientes/Update/' + row.id + '/" class="btn btn-warning"><i class="fas-col fas fa-edit"></i></a> ';
+                    buttons += '<a href="/Clientes/Delete/' + row.id + '/" rel="delete" title="Eliminar usu" type="button" class="btn btn-danger  "><i class="fas-col fas fa-trash-alt"></i></a>';
                     return buttons;
                 }
             },
