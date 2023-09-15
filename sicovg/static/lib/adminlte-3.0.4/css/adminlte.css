@@ -67,6 +67,7 @@ body {
   color: #212529;
   text-align: left;
   background-color: #ffffff;
+ 
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -163,7 +164,7 @@ a {
   text-decoration: none;
   background-color: transparent;
 }
-
+|
 a:hover {
   color: #0056b3;
   text-decoration: none;
@@ -4781,7 +4782,7 @@ input[type="button"].btn-block {
   word-wrap: break-word;
   /*background-color: #ffffff;*/
   background-clip: border-box;
-  border: 2px solid #00d7b2;
+  border: 2px solid #2999FF;
   border-radius: 0.25rem;
 }
 
@@ -11455,7 +11456,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 .content-wrapper {
-  background: #f4f6f9;
+  background: rgb(119, 131, 160);
 }
 
 .content-wrapper > .content {
@@ -11989,7 +11990,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 [class*='sidebar-light-'] {
-  background: linear-gradient(180deg, rgba(11,11,28,1) 52%, rgba(12,10,58,1) 100%);
+  background: linear-gradient(180deg, rgb(5, 69, 128) 52%, rgb(26, 106, 166) 80%);
 }
 
 [class*='sidebar-light-'] .user-panel a:hover {
@@ -19096,6 +19097,7 @@ html.maximized-card {
   min-height: 80px;
   padding: .5rem;
   position: relative;
+  border: 2px solid #2999FF;
 }
 
 .info-box .progress {

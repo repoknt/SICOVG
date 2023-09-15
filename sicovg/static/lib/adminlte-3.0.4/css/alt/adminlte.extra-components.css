@@ -171,7 +171,8 @@
 }
 
 .info-box .progress-description,
-.info-box .info-box-text {
+.info-box .info-box-text { 
+  font-weight: 900; 
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
