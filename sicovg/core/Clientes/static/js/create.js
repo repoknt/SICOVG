@@ -2,22 +2,41 @@ $(function () {
     function validarFormulario() {
         var nombres = /^[a-zA-ZÀ-ÿ\s]{8,128}$/; // Letras y espacios, pueden llevar acentos.
         var telefono = /^\d{10}$/; //  10
-        var idCuent = /^\d{9}$/; //  10
+        var noInt = /^\d{1,6}$/; //  10
+         var noExt = /^\d{1,6}$/; //  10
+        var codigoP = /^\d{1,3}$/; //  10
         var curp = /^[a-zA-ZÀ-ÿ\d]{10,13}$/; // Letras, numeros
         var correo = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         var social = /^.[a-zA-ZÀ-ÿ\s\d]{9,128}$/;
         var valCuenta = /^(\d|)*\.?(\d|)*\.?(\d)*\d$/;
                 if (curp.test(document.getElementById('id_RFC').value)) {
                     if (correo.test(document.getElementById('id_email').value)) {
-                            if (telefono.test(document.getElementById('id_telefono').value)) {
-                                return true;
-                            } else {
+                        if (telefono.test(document.getElementById('id_telefono').value)) {
+                               if (noInt.test(document.getElementById('id_noInt').value)) {
+                                    if (noExt.test(document.getElementById('id_noExt').value)) {
+                                     return true;
+                                    } else {
+                                    Swal.fire({
+                                title: 'Error!',
+                                text: 'No.Exterior inválido, verifique que no hayan letras',
+                                icon: 'error'
+                            });
+                                    }
+                               } else {
                                 Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Teléfono inválido',
-                                    icon: 'error'
-                                });
-                            }
+                                title: 'Error!',
+                                text: 'No.Interior inválido, verifique que no hayan letras',
+                                icon: 'error'
+                            });
+                        }
+
+                        } else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Teléfono inválido',
+                                icon: 'error'
+                            });
+                        }
 
                     } else {
                         Swal.fire({

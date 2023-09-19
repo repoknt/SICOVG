@@ -5,6 +5,7 @@ from datetime import datetime
 
 class Clientes(models.Model):
     razonSocial = models.CharField(max_length=256, verbose_name='Razon social', null=False, unique=False)
+    denominacion = models.CharField(max_length=6, verbose_name='Denominacion', null=False, blank=True)
     email = models.CharField(max_length=128, verbose_name='Email', blank=True, null=True)
     RFC = models.CharField(max_length=18, verbose_name='RFC', unique=False)
     calle = models.CharField(max_length=128, verbose_name='Calle', null=True, blank=True)
@@ -50,13 +51,13 @@ class Proovedor(models.Model):
 
 
 class Inventario(models.Model):
-    NombresProducto = models.CharField(max_length=100,verbose_name='Nombre Producto', null=False)
-    Descripcion = models.CharField(max_length=200,verbose_name=' Descripcion', null=False)
-    Categoria = models.CharField(max_length=100,verbose_name='Categoria ', null=False)
-    NumeroDeSerie = models.CharField(max_length=20,verbose_name=' Numero De Serie', null=False)
+    NombresProducto = models.CharField(max_length=100, verbose_name='Nombre Producto', null=False)
+    Descripcion = models.CharField(max_length=200, verbose_name=' Descripcion', null=False)
+    Categoria = models.CharField(max_length=100, verbose_name='Categoria ', null=False)
+    NumeroDeSerie = models.CharField(max_length=20, verbose_name=' Numero De Serie', null=False)
     CantidadDeStock = models.IntegerField(verbose_name=' Cantidad En Stock', null=False)
-    PrecioUnitario = models.FloatField(max_length=50,verbose_name=' Precio Unitario', null=False)
-    PrecioDeCompra = models.FloatField(max_length=50,verbose_name=' Precio De Compra', null=False)
+    PrecioUnitario = models.FloatField(max_length=50, verbose_name=' Precio Unitario', null=False)
+    PrecioDeCompra = models.FloatField(max_length=50, verbose_name=' Precio De Compra', null=False)
     FechaDeCompra = models.DateField(default=datetime.now, verbose_name='Fecha De Compra', null=False)
     NivelDeReordenamiento = models.IntegerField(verbose_name=' Numero De Ordenamiento ', null=False)
 

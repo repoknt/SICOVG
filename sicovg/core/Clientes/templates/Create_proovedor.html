@@ -27,7 +27,7 @@
         </div>
          <div class="form-group col-md-3">
             <label>{{ form.cuenta.label }}</label>
-            {{ form.cuenta|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese el RFC'|attr:'onkeyup:javascript:this.value = this.value.toUpperCase();'|attr:'required'|attr:'minlength:10'|attr:'maxlength:13' }}
+            {{ form.cuenta|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese el numero de cuenta'|attr:'onkeyup:javascript:this.value = this.value.toUpperCase();'|attr:'required'|attr:'minlength:10'|attr:'maxlength:10' }}
         </div>
         <div class="form-group col-md-2">
             <label>{{ form.noInt.label }}</label>
@@ -58,11 +58,11 @@
         </div>
         <div class="form-group col-md-4">
             <label>{{ form.representanteLegal.label }}</label>
-            {{ form.representanteLegal|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese el email'|attr:'required' }}
+            {{ form.representanteLegal|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese al Representante Legal'|attr:'required' }}
         </div>
         <div class="form-group col-md-3">
             <label>{{ form.telefono.label }}</label>
-            {{ form.telefono|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese el telefono 2'|attr:'required' }}
+            {{ form.telefono|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese el numero Telefonico'|attr:'required' }}
         </div>
     </div>
 

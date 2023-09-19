@@ -2,10 +2,11 @@ var tblUser;
 
 $(function () {
     tblUser = $('#data').DataTable({
-        responsive: true,
-        autoWidth: false,
-        destroy: true,
+           responsive: false,
+       autoWidth: false,
+        destroy: false,
         deferRender: true,
+        scrollX: true,
         ajax: {
             url: window.location.pathname,
             type: 'POST',
@@ -31,10 +32,22 @@ $(function () {
         ],
         columnDefs: [
             {
-                targets: [9],
+                targets: [6],
                 class: 'text-center',
                 orderable: false,
-
+                render: function (data, type, row) {
+                    var precioUnitario = row.PrecioUnitario + " MXN" ; // Formatea el valor
+                    return precioUnitario;
+                },
+            },
+             {
+                targets: [7],
+                class: 'text-center',
+                orderable: false,
+                render: function (data, type, row) {
+                    var PrecioDeCompra = row.PrecioDeCompra + " MXN" ; // Formatea el valor
+                    return PrecioDeCompra;
+                },
             },
             {
                 targets: [10],
@@ -44,7 +57,9 @@ $(function () {
                     var buttons = '<a href="/Inventario/Update/' + row.id + '/" class="btn btn-warning btn-xs btn-flat"><i class="fas-col fas fa-edit"></i></a> ';
                     buttons += '<a href="/Inventario/Delete/' + row.id + '/" rel="delete" title="Eliminar usu" type="button" class="btn btn-danger btn-xs btn-flat"><i class="fas-col fas fa-trash-alt"></i></a>';
                     return buttons;
+
                 }
+
             },
         ],
         initComplete: function (settings, json) {
