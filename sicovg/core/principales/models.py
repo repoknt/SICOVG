@@ -1,9 +1,10 @@
 from django.db import models
 from django.forms import model_to_dict
 from datetime import datetime
-
+from datetime import date
 
 class Clientes(models.Model):
+    idCliente = models.AutoField(primary_key=True, verbose_name='idCliente')
     razonSocial = models.CharField(max_length=256, verbose_name='Razon social', null=False, unique=False)
     denominacion = models.CharField(max_length=6, verbose_name='Denominacion', null=False, blank=True)
     email = models.CharField(max_length=128, verbose_name='Email', blank=True, null=True)
@@ -22,12 +23,11 @@ class Clientes(models.Model):
         verbose_name = 'cliente'
         verbose_name_plural = 'Clientes'
 
-    def toJSON(self):
-        item = model_to_dict(self)
-        return item
+    
 
 
 class Proovedor(models.Model):
+    idProveedor = models.AutoField(primary_key=True, verbose_name='idProveedor')
     razonSocial = models.CharField(max_length=256, null=False, unique=False)
     cuenta = models.CharField(max_length=10, verbose_name='Cuenta', unique=True)
     RFC = models.CharField(max_length=18, verbose_name='RFC', unique=False)
@@ -45,12 +45,11 @@ class Proovedor(models.Model):
         verbose_name = 'Proovedor'
         verbose_name_plural = 'Proovedores'
 
-    def toJSON(self):
-        item = model_to_dict(self)
-        return item
+    
 
 
 class Inventario(models.Model):
+    idInventario = models.AutoField(primary_key=True, verbose_name='idInventario') 
     NombresProducto = models.CharField(max_length=100, verbose_name='Nombre Producto', null=False)
     Descripcion = models.CharField(max_length=200, verbose_name=' Descripcion', null=False)
     Categoria = models.CharField(max_length=100, verbose_name='Categoria ', null=False)
@@ -66,6 +65,34 @@ class Inventario(models.Model):
         verbose_name = 'Inventario'
         verbose_name_plural = 'Inventarios'
 
-    def toJSON(self):
-        item = model_to_dict(self)
-        return item
+    
+
+
+class Venta(models.Model):
+    idVenta = models.AutoField(primary_key=True, verbose_name='idVenta')
+    clienteId = models.ForeignKey(Clientes, verbose_name='idCliente', on_delete=models.PROTECT)
+    totalDeVentas = models.FloatField(max_length=50, verbose_name='Total de Venta', null=False)
+    fechaDeCompra = models.DateField(default=date.today, verbose_name='Fecha de Compra', null=False)
+
+    class Meta:
+        db_table = 'Venta'
+        verbose_name = 'Venta'
+        verbose_name_plural = 'Ventas'
+
+    
+
+class DetalleVenta(models.Model):
+    idDetalleVenta = models.AutoField(primary_key=True, verbose_name='idDetalleVenta')
+    ventaId = models.ForeignKey(Venta, verbose_name='idVenta', on_delete=models.PROTECT)
+    inventarioId = models.ForeignKey(Inventario, verbose_name='idInventario', on_delete=models.PROTECT)
+    cantidad = models.IntegerField( verbose_name='Cantidad', null=False)
+    precioUnitario = models.FloatField(max_length=50, verbose_name='Precio Unitario', null=False)
+    precioTotal = models.FloatField(max_length=50, verbose_name='Precio Total', null=False)
+    fechaDeCompra = models.DateField(default=date.today, verbose_name='Fecha de Compra', null=False)
+
+    class Meta:
+        db_table = 'DetalleVenta'
+        verbose_name = 'DetalleVenta'
+        verbose_name_plural = 'DetalleVentas'
+
+    
