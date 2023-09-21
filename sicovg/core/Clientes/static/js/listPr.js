@@ -18,7 +18,7 @@ $(function () {
             },
         },
         columns: [
-            {"data": "id"},
+            {"data": "idProveedor"},
             {"data": "razonSocial"},
             {"data": "RFC"},
             {"data": "cuenta"},

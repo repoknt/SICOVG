@@ -18,7 +18,7 @@ $(function () {
             },
         },
         columns: [
-            {"data": "id"},
+            {"data": "idCliente"},
             {"data": "razonSocial"},
             {"data": "RFC"},
             {"data": "email"},

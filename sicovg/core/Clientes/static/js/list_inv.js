@@ -19,7 +19,7 @@ $(function () {
             },
         },
         columns: [
-            {"data": "id"},
+            {"data": "idInventario"},
             {"data": "NombresProducto"},
             {"data": "Descripcion"},
             {"data": "Categoria"},
