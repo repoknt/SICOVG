@@ -21,7 +21,7 @@ $(function () {
                                 text: 'No.Exterior inválido, verifique que no hayan letras',
                                 icon: 'error'
                             });
-                                    }
+                               }
                                } else {
                                 Swal.fire({
                                 title: 'Error!',
@@ -29,7 +29,6 @@ $(function () {
                                 icon: 'error'
                             });
                         }
-
                         } else {
                             Swal.fire({
                                 title: 'Error!',
@@ -37,7 +36,6 @@ $(function () {
                                 icon: 'error'
                             });
                         }
-
                     } else {
                         Swal.fire({
                             title: 'Error!',
@@ -52,8 +50,6 @@ $(function () {
                         icon: 'error'
                     });
                 }
-
-
         return false;
     }
 

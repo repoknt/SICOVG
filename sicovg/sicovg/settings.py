@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'core.Clientes',
     'core.Proovedores',
     'core.Inventario',
+    'core.Ventas',
   
 ]
 

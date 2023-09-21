@@ -23,7 +23,7 @@
                 <a class="btn" style="border-block-color: #818092" data-toggle="collapse" href="#collapseAdministrador"
                    role="button" aria-expanded="false" aria-controls="collapseExample">
                    <p class="text-left" style="color: white">
-                    <i class="fas fa-list" style="color: white"></i> Cliente/Proveedor
+                    <i class="fa-solid fa-users"></i> Cliente/Proveedor
                 </p>
                 </a>
                 <div class="collapse" id="collapseAdministrador">
@@ -45,6 +45,13 @@
                     </li>
                 </div>
 
+                 <a class="btn" style="border-block-color:#818092" data-toggle="collapse" href="#collapseCoordinador"
+                   role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <p class="text-left" style="color: white">
+                        <i class="fa-solid fa-boxes-stacked"></i> Inventario
+                    </p>
+                </a>
+                <div class="collapse" id="collapseCoordinador" >
                 <li class="nav-item">
                     <a href="{% url 'Inventario:List' %}" class="nav-link">
                         <i class="fas fa-edit"></i>
@@ -53,8 +60,22 @@
                         </p>
                     </a>
                 </li>
-
-                
+                </div>
+                  <a class="btn" style="border-block-color:#818092" data-toggle="collapse" href="#collapseEjecutivo"
+                   role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <p class="text-left" style="color: white">
+                        <i class="fa-solid fa-cart-shopping"></i> Ventas
+                    </p>
+                </a>
+                <div class="collapse" id="collapseEjecutivo">
+                    <li class="nav-item">
+                        <a  class="nav-link">
+                            <i class="fa-solid fa-money-check"></i>
+                            <p>
+                               Seguimiento de ventas
+                            </p>
+                        </a>
+                    </li>
                 </div>
             </ul>
         </nav>

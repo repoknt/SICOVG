@@ -62,7 +62,6 @@ def page_not_found404(request, exception):
 class ClienteCreateView(LoginRequiredMixin, CreateView):
     model = Clientes
     template_name = 'Create_cliente.html'
-    # Formulario que ocuparemos en la vista
     form_class = ClienteForm
     success_url = reverse_lazy('Clientes:Cliente')
     url_redirect = success_url
@@ -76,9 +75,7 @@ class ClienteCreateView(LoginRequiredMixin, CreateView):
         try:
             action = request.POST['action']
             if action == 'add':
-                # Recuperaremos el formulario
                 form = self.get_form()
-                # Ejecutaremos el metodo save
                 data = form.save()
             elif action == 'search_cp':
                 colonias = []
