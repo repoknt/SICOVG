@@ -1,0 +1,124 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
+    <link rel="stylesheet"
+          href="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
+    <script src="{% static 'lib/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'seguimientoVentas/seguimientoVentas.js' %}"></script>
+{% endblock %}
+{% block pantallaDeCarga %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <div class="card ">
+                <div class="card-header col-greent">
+                    <h3 class="card-title"><i class="fas fa-search"></i> Buscar Cuenta</h3>
+                </div>
+                <div class="card-body">
+                    <input type="hidden" class="form form-controlt" name="idU" id="idU"
+                           value="{{ request.user.id }}">
+                    <div class="row">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ action }}" name="action" id="action">
+                        <div class="form-group col-md-4">
+                            <label>Buscar por:</label>
+                            <select name="tipoCampo" id="tipoCampo" class="form form-controltt">
+                                    <option value="Numero de cuenta">Numero de Cuenta</option>
+                                    <option value="RFC">RFC</option>
+                                    <option value="Razon social">Razon Social</option>
+                                </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                                <label>Valor:</label>
+                                <input type="text" class="form form-controltt" name="valor" id="valor"
+                                       placeholder="Ingrese el valor por favor" autofocus="True" required minlength="6"
+                                       maxlength="13">
+                            </div>
+
+                            
+                        <div class="form-group col-md-4">
+                            <hr>
+                            <input type="submit" class="form-control btn btn-bluest" name="btnTodo"
+                                   id="btnTodo" value="Buscar">
+                        </div>
+                       
+                      
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn btn-yellowt" name="btnPendiente" id="btnPendiente" value="Pendiente">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn btn-yellowt" name="btnEsperaPago" id="btnEsperaPago" value="En espera de pago">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn btn-yellowt" name="btnProceso" id="btnProceso" value="En proceso">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn btn-yellowt" name="btnRevision" id="btnRevision" value="En Revisión">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn btn-yellowt" name="btnEnviada" id="btnEnviada" value="Enviada">
+            </div>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn-yellowt" name="btnEntregada" id="btnEntregada" value="Entregada">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn-yellowt" name="btnCompletada" id="btnCompletada" value="Completada">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn-yellowt" name="btnRembolsada" id="btnRembolsada" value="Rembolsada">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn-yellowt" name="btnDevuelta" id="btnDevuelta" value="Devuelta">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn-yellowt" name="btnCancelada" id="btnCancelada" value="Cancelada">
+            </div>
+        </div>
+    </div>
+    
+
+    {# TABLA DEL BOTON BUSCAR#}
+    <div class="card">
+        <div class="card-header col-greent">
+            <h3 class="card-title"><i class="fa-regular fa-clipboard"></i> Seguimiento de Venta</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered" id="data">
+                <thead>
+                <h5 style="text-align: center"><b id="tipoTabla"></b></h5>
+                <tr style="font-size: 15px;">
+                    <th style="width: 20%;">Razón Social</th>
+                    <th style="width: 8%;">Cuenta</th>
+                    <th style="width: 8%;">RFC</th>
+                    <th style="width: 8%;">Numero</th>
+                    <th style="width: 20%;">Comentario</th>
+                    <th style="width: 8%;">Estatus</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+ 
+
+{% endblock %}

@@ -81,6 +81,7 @@ class Venta(models.Model):
     clienteId = models.ForeignKey(Clientes, verbose_name='idCliente', on_delete=models.PROTECT)
     totalDeVentas = models.FloatField(max_length=50, verbose_name='Total de Venta', null=False)
     fechaDeCompra = models.DateField(default=date.today, verbose_name='Fecha de Compra', null=False)
+    estatus = models.CharField(max_length=100, verbose_name='Estatus', null=False)
 
     class Meta:
         db_table = 'Venta'
