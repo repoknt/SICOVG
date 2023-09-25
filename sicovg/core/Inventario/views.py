@@ -100,7 +100,7 @@ class InventarioUpdateView(LoginRequiredMixin, UpdateView):
     model = Inventario
     form_class = InventarioForm
     template_name = 'Inventario_create.html'
-    success_url = reverse_lazy('Inventario:Create')
+    success_url = reverse_lazy('Inventario:List')
     url_redirect = success_url
 
     @method_decorator(csrf_exempt)

@@ -36,8 +36,8 @@ $(function () {
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                   var buttons = '<a href="/Clientes/Update/' + row.id + '/" class="btn btn-warning"><i class="fas-col fas fa-edit"></i></a> ';
-                    buttons += '<a href="/Clientes/Delete/' + row.id + '/" rel="delete" title="Eliminar usu" type="button" class="btn btn-danger  "><i class="fas-col fas fa-trash-alt"></i></a>';
+                   var buttons = '<a href="/Clientes/Update/' + row.idCliente + '/" class="btn btn-warning"><i class="fas-col fas fa-edit"></i></a> ';
+                    buttons += '<a href="/Clientes/Delete/' + row.idCliente + '/" rel="delete" title="Eliminar usu" type="button" class="btn btn-danger  "><i class="fas-col fas fa-trash-alt"></i></a>';
                     return buttons;
                 }
             },
