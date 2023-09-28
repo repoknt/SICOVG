@@ -12,6 +12,7 @@ class PrForm(ModelForm):
 
     class Meta:
         model = Proovedor
+        exclude = ['activo']
         fields = '__all__'
 
         widgets = {
