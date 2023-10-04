@@ -444,3 +444,16 @@ background-color:#f4f4f490;
         th {
             text-align: left;
         }
+
+
+        #btnPendiente { background-color: #58C3DF; }
+#btnEsperaPago { background-color: #FFA07A; } /* Light Salmon */
+#btnProceso { background-color: #FFD700; } /* Gold */
+#btnRevision { background-color: #A9A9A9; } /* Dark Gray */
+#btnEnviada { background-color: #98FB98; } /* Pale Green */
+#btnEntregada { background-color: #FFABAB; } /* Pale Red */
+#btnCompletada { background-color: #D2B48C; } /* Tan */
+#btnRembolsada { background-color: #9370DB; } /* Medium Purple */
+#btnDevuelta { background-color: #F0E68C; } /* Khaki */
+#btnCancelada { background-color: #FF6B81; } /* Blush */ 
+

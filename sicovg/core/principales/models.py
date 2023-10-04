@@ -82,6 +82,7 @@ class Venta(models.Model):
     totalDeVentas = models.FloatField(max_length=50, verbose_name='Total de Venta', null=False)
     fechaDeCompra = models.DateField(default=date.today, verbose_name='Fecha de Compra', null=False)
     estatus = models.CharField(max_length=100, verbose_name='Estatus', null=False)
+    comentario = models.CharField(max_length=250, verbose_name='Estatus', null=False)
 
     class Meta:
         db_table = 'Venta'
