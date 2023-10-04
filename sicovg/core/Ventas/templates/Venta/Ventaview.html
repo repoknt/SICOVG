@@ -1,0 +1,163 @@
+{% extends 'form.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block head_form %}
+    {#    Query#}
+    <link href="{% static 'lib/jquery-ui-1.12.1/jquery-ui.min.css' %}" rel="stylesheet"/>
+    <script src="{% static 'lib/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+
+    <link href="{% static 'lib/select2-4.0.13/css/select2.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'lib/select2-4.0.13/css/select2-bootstrap4.min.css' %}" rel="stylesheet"/>
+    <script src="{% static 'lib/select2-4.0.13/js/select2.min.js' %}"></script>
+    <script src="{% static 'lib/select2-4.0.13/js/i18n/es.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
+    <link rel="stylesheet"
+          href="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
+    <script src="{% static 'lib/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'Venta/VentaList.js' %}"></script>
+{% endblock %}
+{% block pantallaDeCarga %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <div class="card ">
+                <div class="card-header col-greent ">
+                    <h3 class="card-title">Buscar Cuenta</h3>
+                </div>
+                <form>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Buscar por:</label>
+                                <select name="tipoCampo" id="tipoCampo" class="form form-control">
+                                    <option value="cuenta">Cuenta</option>
+                                    <option value="razon">Razón social</option>
+                                    <option value="RFC">RFC</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Valor:</label>
+                                <input type="text" class="form form-controltt" name="valor" id="valor"
+                                       placeholder="Ingrese el valor por favor" autofocus="True" required minlength="6"
+                                       maxlength="13">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="submit" class="form form-control btn-yellowt" name="btnDetalle"
+                                       id="btnDetalle" value="Aceptar">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+<div class="card-body">
+    <div class="card">
+      <div class="card-header col-greent ">
+                    <h3 class="card-title">Resultados de:</h3>
+                </div>
+    <div class="row">
+        <input type="hidden" value="" name="tokenid" id="tokenid">
+        <div class="form-group col-md-3">
+            <label>RazonSocial</label>
+            <input type="text" name="idProveedor" maxlength="128" required
+                   onkeyup="javascript:this.value = this.value.toUpperCase();" readonly placeholder="Ingrese la razón social"
+                   autocomplete="off" class="form-control" id="idProveedor">
+        </div>
+        <div class="form-group col-md-3">
+            <label>Cuenta</label>
+            <input type="text" name="razonSocial" maxlength="10" minlength="6" required readonly placeholder="Ingrese la cuenta"
+                   autocomplete="off" class="form-control" id="razonSocial">
+        </div>
+        <div class="form-group col-md-3">
+            <label>RFC</label>
+            <input type="text" name="cuenta" maxlength="18" required
+                   onkeyup="javascript:this.value = this.value.toUpperCase();" readonly placeholder="Ingrese el RFC"
+                   autocomplete="off" class="form-control" id="cuenta">
+        </div>
+        <div class="form-group col-md-3">
+            <label>Id del proveedor</label>
+            <input type="text" name="RFC" maxlength="9" required readonly placeholder="Ingrese el id de cuenta"
+                   autocomplete="off" class="form-control" id="RFC">
+        </div>
+        <div class="form-group col-md-3">
+            <label>Codigo Postal</label>
+            <div class="input-group">
+                <input type="text" name="codigoPostal" maxlength="5" required readonly class="form-control" id="codigoPostal">
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label>Estado</label>
+            <input type="text" name="municipio" maxlength="64" required readonly class="form-control" id="municipio">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Municipio</label>
+            <input type="text" name="estado" maxlength="128" required readonly class="form-control"
+                   id="estado">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Colonia</label>
+            <input name="colonia" maxlength="128" required readonly class="form-control" id="colonia">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Email</label>
+            <input type="text" name="telefono" maxlength="128" required readonly placeholder="Ingrese el email" autocomplete="off"
+                   class="form-control" id="telefono">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Representante legal</label>
+            <input type="text" name="email" maxlength="64" required readonly
+                   onkeyup="javascript:this.value = this.value.toUpperCase();"
+                   placeholder="Ingrese el representante legal" autocomplete="off" class="form-control"
+                   id="email">
+        </div>
+        <div class="form-group col-md-3">
+            <label>Telefono</label>
+            <input type="text" name="representanteLegal" maxlength="10" required readonly placeholder="Ingrese el telefono 2"
+                   autocomplete="off" class="form-control" id="representanteLegal">
+        </div>
+    </div>
+</div>
+    </div>
+ <a href="" class="btn btn-yellowt btn-lg btn-block" id="goOrden" target="_blank"><i
+            class="fas fa-external-link-alt"></i> Ir a Orden</a>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">DN ligados a la cuenta</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+            <table class="table table-bordered" id="data">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>DN</th>
+                    <th>Plazo</th>
+                    <th>Plan</th>
+                    <th>Fecha Inicial</th>
+                    <th>Fecha Término</th>
+                    <th>Agregar a la Orden</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+{% endblock %}
+
+{% block AJAX %}
+{% endblock %}

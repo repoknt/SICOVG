@@ -2,10 +2,10 @@ var tblUser;
 
 $(function () {
     tblUser = $('#data').DataTable({
-       autoWidth: true,
+        responsive: true,
+        autoWidth: false,
         destroy: true,
         deferRender: true,
-        scrollX: true,
         ajax: {
             url: window.location.pathname,
             type: 'POST',
@@ -23,24 +23,23 @@ $(function () {
             {"data": "RFC"},
             {"data": "cuenta"},
             {"data": "codigoPostal"},
-            {"data": "municipio"},
             {"data": "colonia"},
             {"data": "email"},
         ],
         columnDefs: [
             {
-                targets: [7],
+                targets: [6],
                 class: 'text-center',
                 orderable: false,
 
             },
             {
-                targets: [8],
+                targets: [7],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {
-                    var buttons = '<a href="/Proovedores/Update/' + row.id + '/" class="btn btn-warning"><i class="fas-col fas fa-edit"></i></a> ';
-                    buttons += '<a href="/Proovedores/Delete/' + row.id + '/" rel="delete" title="Eliminar usu" type="button" class="btn btn-danger"><i class="fas-col fas fa-trash-alt"></i></a>';
+                    var buttons = '<a href="/Proovedores/Update/' + row.idProveedor + '/" class="btn btn-warning"><i class="fas-col fas fa-edit"></i></a> ';
+                    buttons += '<a href="/Proovedores/Delete/' + row.idProveedor + '/" rel="delete" title="Eliminar usu" type="button" class="btn btn-danger"><i class="fas-col fas fa-trash-alt"></i></a>';
                     return buttons;
                 }
             },
