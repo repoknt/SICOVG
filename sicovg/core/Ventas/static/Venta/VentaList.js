@@ -13,21 +13,20 @@ $(function () {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: res.error,
+                    text: 'La cuenta no existe, verifique que sea valida',
                 })
             } else {
-            document.getElementById('id_Proveedor').value = res.idProveedor;
-            document.getElementById('id_razonSocial').value = res.razonSocial;
-            document.getElementById('id_cuenta').value = res.cuenta;
-            document.getElementById('id_RFC').value = res.RFC;
-            document.getElementById('id_codigoPostal').value = res.codigoPostal;
-            document.getElementById('id_municipio').value = res.municipio;
-            document.getElementById('id_estado').value = res.estado;
-            document.getElementById('id_colonia').value = res.colonia;
-            document.getElementById('id_telefono').value = res.telefono;
-            document.getElementById('id_email').value = res.email;
-            document.getElementById('id_representanteLegal').value = res.representanteLegal;
-            console.log(res.id_Proveedor)
+            document.getElementById('razonSocial').value = res.razonSocial;
+            document.getElementById('cuenta').value = res.cuenta;
+            document.getElementById('RFC').value = res.RFC;
+            document.getElementById('codigoPostal').value = res.codigoPostal;
+            document.getElementById('estado').value = res.estado;
+            document.getElementById('municipio').value = res.municipio;
+            document.getElementById('colonia').value = res.colonia;
+            document.getElementById('telefono').value = res.telefono;
+            document.getElementById('email').value = res.email;
+
+
             }
         });
     });
@@ -169,7 +168,7 @@ $(function () {
                 dataSrc: ""
             },
             columns: [
-                {"data": "idVenta"},
+                {"data": "idCliente"},
                 {"data": "empresaDn.dn"},
                 {"data": "plazo"},
                 {"data": "plan.plan"},

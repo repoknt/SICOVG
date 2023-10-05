@@ -4,27 +4,21 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import JsonResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, CreateView, UpdateView, TemplateView, FormView, DeleteView
 from django.contrib import messages
-from core.principales.models import Proovedor
-from core.Proovedores.forms import PrForm
+from core.principales.models import Clientes
+from core.Clientes.forms import ClienteForm
 from django.utils import timezone
 
 
 # Nombre de la clase y su herencia
 class Ventaview(LoginRequiredMixin, FormView):
-    form_class = PrForm
+    form_class = ClienteForm
     template_name = 'Venta/Ventaview.html'
-
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        self.id = request.user.id
-        self.usuario = request.user
-        return super().dispatch(request, *args, **kwargs)
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -33,27 +27,38 @@ class Ventaview(LoginRequiredMixin, FormView):
     def post(self, request, *args, **kwargs):
         data = {}
         try:
-            action = request.POST['action']
-            # Buscar cuenta por DN o cuenta O RFC
+            action = request.POST.get('action')
+            campo = request.POST.get('campo')
+            valor = request.POST.get('valor')
+
             if action == 'BuscarCuenta':
-                campo = request.POST['campo']
-                valor = request.POST['valor']
-                # Evaluamos el tipo de búsqueda
                 if campo == 'cuenta':
-                    empresa = Proovedor.objects.raw(
-                        "SELECT * FROM Proovedor WHERE cuenta = '{}';".format(
-                            valor))
+                    Cliente = get_object_or_404(Clientes, cuenta=valor)
                 else:
-                    empresa = Proovedor.objects.raw("SELECT * FROM Proovedor WHERE {} = '{}';".format(campo, valor))
-                # Evaluamos si existe una coincidencia
-                if empresa:
-                    for i in empresa:
-                        # Si existe comprobaremos el empleado
-                        Pr = Proovedor.objects.get(idProveedor=i.idProveedor)
-                        # Si es ejecutivo, se sometera a propiedad de la cuenta
-                else:
-                    data['error'] = 'No hay coincidencias'
-                    data.append(Proovedor.toJSON())
+                    Cliente = get_object_or_404(Clientes, RFC=valor)
+
+                data = {
+                    'cuenta': Cliente.cuenta,
+                    'razonSocial': Cliente.razonSocial,
+                    'RFC': Cliente.RFC,
+                    'idProveedor': Cliente.idCliente,
+                    'codigoPostal': Cliente.codigoPostal,
+                    'estado': Cliente.estado,
+                    'municipio': Cliente.municipio,
+                    'colonia': Cliente.colonia,
+                    'email': Cliente.email,
+                    'telefono': Cliente.telefono,
+                }
+            else:
+                data['error'] = 'No ha ingresado a ninguna opción'
+        except Clientes.DoesNotExist:
+            data['error'] = 'No hay coincidencias'
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Ventas'
+        context['name'] = 'Cliente'
+        return context

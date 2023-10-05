@@ -31,7 +31,7 @@
         <div class="col-md-8">
             <div class="card ">
                 <div class="card-header col-greent ">
-                    <h3 class="card-title">Buscar Cuenta</h3>
+                    <h3 class="card-title">Buscar {{ name }}</h3>
                 </div>
                 <form>
                     <div class="card-body">
@@ -40,7 +40,6 @@
                                 <label>Buscar por:</label>
                                 <select name="tipoCampo" id="tipoCampo" class="form form-control">
                                     <option value="cuenta">Cuenta</option>
-                                    <option value="razon">Razón social</option>
                                     <option value="RFC">RFC</option>
                                 </select>
                             </div>
@@ -54,6 +53,7 @@
                                 <input type="submit" class="form form-control btn-yellowt" name="btnDetalle"
                                        id="btnDetalle" value="Aceptar">
                             </div>
+
                         </div>
                     </div>
                 </form>
@@ -62,33 +62,29 @@
         <div class="col-md-2">
         </div>
     </div>
-<div class="card-body">
+<div>
+<div class="card">
     <div class="card">
       <div class="card-header col-greent ">
-                    <h3 class="card-title">Resultados de:</h3>
+                    <h3 class="card-title">Datos del {{ name }}</h3>
                 </div>
-    <div class="row">
+    <div class="row form-group col-md">
         <input type="hidden" value="" name="tokenid" id="tokenid">
         <div class="form-group col-md-3">
             <label>RazonSocial</label>
-            <input type="text" name="idProveedor" maxlength="128" required
+            <input type="text" name="razonSocial" maxlength="128" required
                    onkeyup="javascript:this.value = this.value.toUpperCase();" readonly placeholder="Ingrese la razón social"
-                   autocomplete="off" class="form-control" id="idProveedor">
-        </div>
-        <div class="form-group col-md-3">
-            <label>Cuenta</label>
-            <input type="text" name="razonSocial" maxlength="10" minlength="6" required readonly placeholder="Ingrese la cuenta"
                    autocomplete="off" class="form-control" id="razonSocial">
         </div>
         <div class="form-group col-md-3">
-            <label>RFC</label>
-            <input type="text" name="cuenta" maxlength="18" required
-                   onkeyup="javascript:this.value = this.value.toUpperCase();" readonly placeholder="Ingrese el RFC"
+            <label>Cuenta</label>
+            <input type="text" name="cuenta" maxlength="10" minlength="6" required readonly placeholder="Ingrese la cuenta"
                    autocomplete="off" class="form-control" id="cuenta">
         </div>
         <div class="form-group col-md-3">
-            <label>Id del proveedor</label>
-            <input type="text" name="RFC" maxlength="9" required readonly placeholder="Ingrese el id de cuenta"
+            <label>RFC</label>
+            <input type="text" name="RFC" maxlength="18" required
+                   onkeyup="javascript:this.value = this.value.toUpperCase();" readonly placeholder="Ingrese el RFC"
                    autocomplete="off" class="form-control" id="RFC">
         </div>
         <div class="form-group col-md-3">
@@ -99,11 +95,11 @@
         </div>
         <div class="form-group col-md-4">
             <label>Estado</label>
-            <input type="text" name="municipio" maxlength="64" required readonly class="form-control" id="municipio">
+            <input type="text" name="estado" maxlength="64" required readonly class="form-control" id="municipio">
         </div>
         <div class="form-group col-md-4">
             <label>Municipio</label>
-            <input type="text" name="estado" maxlength="128" required readonly class="form-control"
+            <input type="text" name="municipio" maxlength="128" required readonly class="form-control"
                    id="estado">
         </div>
         <div class="form-group col-md-4">
@@ -112,23 +108,18 @@
         </div>
         <div class="form-group col-md-4">
             <label>Email</label>
-            <input type="text" name="telefono" maxlength="128" required readonly placeholder="Ingrese el email" autocomplete="off"
-                   class="form-control" id="telefono">
+            <input type="text" name="email" maxlength="128" required readonly placeholder="Ingrese el email" autocomplete="off"
+                   class="form-control" id="email">
         </div>
-        <div class="form-group col-md-4">
-            <label>Representante legal</label>
-            <input type="text" name="email" maxlength="64" required readonly
-                   onkeyup="javascript:this.value = this.value.toUpperCase();"
-                   placeholder="Ingrese el representante legal" autocomplete="off" class="form-control"
-                   id="email">
-        </div>
+
         <div class="form-group col-md-3">
             <label>Telefono</label>
-            <input type="text" name="representanteLegal" maxlength="10" required readonly placeholder="Ingrese el telefono 2"
-                   autocomplete="off" class="form-control" id="representanteLegal">
+            <input type="text" name="telefono" maxlength="10" required readonly placeholder="Ingrese el telefono 2"
+                   autocomplete="off" class="form-control" id="telefono">
         </div>
     </div>
 </div>
+    </div>
     </div>
  <a href="" class="btn btn-yellowt btn-lg btn-block" id="goOrden" target="_blank"><i
             class="fas fa-external-link-alt"></i> Ir a Orden</a>
