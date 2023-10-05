@@ -8,7 +8,7 @@ from core.login.models import User
 class Clientes(models.Model):
     idCliente = models.AutoField(primary_key=True, verbose_name='idCliente')
     razonSocial = models.CharField(max_length=256, verbose_name='Razon social', null=False, unique=False)
-    cuenta = models.CharField(max_length=6, verbose_name='Denominacion', null=False, blank=True)
+    cuenta = models.CharField(max_length=6, verbose_name='Cuenta', null=False, blank=True)
     email = models.CharField(max_length=128, verbose_name='Email', blank=True, null=True)
     RFC = models.CharField(max_length=18, verbose_name='RFC', unique=False)
     calle = models.CharField(max_length=128, verbose_name='Calle', null=True, blank=True)
