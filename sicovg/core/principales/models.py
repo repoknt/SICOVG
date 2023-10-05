@@ -8,7 +8,7 @@ from core.login.models import User
 class Clientes(models.Model):
     idCliente = models.AutoField(primary_key=True, verbose_name='idCliente')
     razonSocial = models.CharField(max_length=256, verbose_name='Razon social', null=False, unique=False)
-    cuenta = models.CharField(max_length=6, verbose_name='Numero de cuenta', null=False, blank=True)
+    cuenta = models.CharField(max_length=6, verbose_name='Cuenta', null=False, blank=True)
     email = models.CharField(max_length=128, verbose_name='Email', blank=True, null=True)
     RFC = models.CharField(max_length=18, verbose_name='RFC', unique=False)
     calle = models.CharField(max_length=128, verbose_name='Calle', null=True, blank=True)
@@ -80,9 +80,11 @@ class Inventario(models.Model):
 class Venta(models.Model):
     idVenta = models.AutoField(primary_key=True, verbose_name='idVenta')
     clienteId = models.ForeignKey(Clientes, verbose_name='idCliente', on_delete=models.PROTECT)
+    colaboradorId=models.ForeignKey(User, verbose_name=id, on_delete=models.PROTECT)
     totalDeVentas = models.FloatField(max_length=50, verbose_name='Total de Venta', null=False)
     fechaDeCompra = models.DateField(default=date.today, verbose_name='Fecha de Compra', null=False)
     estatus = models.CharField(max_length=100, verbose_name='Estatus', null=False)
+    comentario = models.CharField(max_length=250, verbose_name='Estatus', null=False)
 
     class Meta:
         db_table = 'Venta'
