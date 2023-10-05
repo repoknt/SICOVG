@@ -80,6 +80,7 @@ class Inventario(models.Model):
 class Venta(models.Model):
     idVenta = models.AutoField(primary_key=True, verbose_name='idVenta')
     clienteId = models.ForeignKey(Clientes, verbose_name='idCliente', on_delete=models.PROTECT)
+    colaboradorId=models.ForeignKey(User, verbose_name=id, on_delete=models.PROTECT)
     totalDeVentas = models.FloatField(max_length=50, verbose_name='Total de Venta', null=False)
     fechaDeCompra = models.DateField(default=date.today, verbose_name='Fecha de Compra', null=False)
     estatus = models.CharField(max_length=100, verbose_name='Estatus', null=False)
