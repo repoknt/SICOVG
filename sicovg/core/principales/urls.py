@@ -6,4 +6,5 @@ app_name = 'principales'
 
 urlpatterns = [
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
+
 ]

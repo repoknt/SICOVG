@@ -59,12 +59,10 @@
                 </form>
             </div>
         </div>
-        <div class="col-md-2">
-        </div>
     </div>
 <div>
 <div class="card">
-    <div class="card">
+
       <div class="card-header col-greent ">
                     <h3 class="card-title">Datos del {{ name }}</h3>
                 </div>
@@ -111,7 +109,6 @@
             <input type="text" name="email" maxlength="128" required readonly placeholder="Ingrese el email" autocomplete="off"
                    class="form-control" id="email">
         </div>
-
         <div class="form-group col-md-3">
             <label>Telefono</label>
             <input type="text" name="telefono" maxlength="10" required readonly placeholder="Ingrese el telefono 2"
@@ -121,33 +118,50 @@
 </div>
     </div>
     </div>
- <a href="" class="btn btn-yellowt btn-lg btn-block" id="goOrden" target="_blank"><i
-            class="fas fa-external-link-alt"></i> Ir a Orden</a>
-    <div class="card">
-        <div class="card-header">
-            <h3 class="text-center">DN ligados a la cuenta</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body p-0">
-            <table class="table table-bordered" id="data">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>DN</th>
-                    <th>Plazo</th>
-                    <th>Plan</th>
-                    <th>Fecha Inicial</th>
-                    <th>Fecha Término</th>
-                    <th>Agregar a la Orden</th>
-                </tr>
-                </thead>
-                <tbody>
+  <form method="POST" action="." enctype="multipart/form-data">
+        <input type="hidden" value="formatoEntrega" name="action" id="action">
+        <div class="card">
+            <div class="card-header col-greent">
+                <h3 class="text-center">Pedido</h3>
+            </div>
+            <div>
 
-                </tbody>
-            </table>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-bordered" id="data">
+                    <thead>
+                    <tr style="font-size: 15px;">
+                        <th style="width: 2%;">#</th>
+                        <th style="width: 2%;">Tipo</th>
+                        <th style="width: 18%;">Producto</th>
+                          <th style="width: 15%;">Cantidad</th>
+                         <th style="width: 15%;">Comentario</th>
+                         <th style="width: 15%;">Precio Unitario</th>
+                         <th style="width: 15%;">Precio Total</th>
+                        <th>X</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <!-- /.card-body -->
-    </div>
+         <div class="row">
+                    <div class="form-group col-md-2">
+                    </div>
+                    <div class="form-group col-md-4">
+
+                    </div>
+                </div>
+        <div class="row">
+             <a class="btn  form-control btn-primary text-align:center" id="addRow">Generar Pedido</a>
+            <div class="form-group col-md-3">
+                <input type="submit" value="Enviar Orden" class="form-control btn-success" id="btnGuardar"
+                       name="btnGuardar">
+
+            </div>
+        </div>
+    </form>
 {% endblock %}
 
 {% block AJAX %}

@@ -54,7 +54,6 @@ class Proovedor(models.Model):
         return item
 
 
-
 class Inventario(models.Model):
     idInventario = models.AutoField(primary_key=True, verbose_name='idInventario')
     NombresProducto = models.CharField(max_length=100, verbose_name='Nombre Producto', null=False)
@@ -80,7 +79,7 @@ class Inventario(models.Model):
 class Venta(models.Model):
     idVenta = models.AutoField(primary_key=True, verbose_name='idVenta')
     clienteId = models.ForeignKey(Clientes, verbose_name='idCliente', on_delete=models.PROTECT)
-    colaboradorId=models.ForeignKey(User, verbose_name=id, on_delete=models.PROTECT)
+    colaboradorId = models.ForeignKey(User, verbose_name=id, on_delete=models.PROTECT)
     totalDeVentas = models.FloatField(max_length=50, verbose_name='Total de Venta', null=False)
     fechaDeCompra = models.DateField(default=date.today, verbose_name='Fecha de Compra', null=False)
     estatus = models.CharField(max_length=100, verbose_name='Estatus', null=False)
@@ -113,3 +112,53 @@ class DetalleVenta(models.Model):
     def toJSON(self):
         item = model_to_dict(self)
         return item
+
+
+class Agendarllamada(models.Model):
+    idAgenda = models.AutoField(primary_key=True, verbose_name='idAgenda')
+    user_al = models.ForeignKey(User, verbose_name='Empleado Agenda', on_delete=models.PROTECT)
+    cliente_al = models.ForeignKey(Clientes, verbose_name='Cliente Agenda', on_delete=models.PROTECT)
+    fechaAgenda = models.DateTimeField(null=True, default=datetime.now, verbose_name='Fecha agenda')
+    fechaLlamada = models.DateTimeField(null=True, verbose_name='Fecha Llamada')
+    color = models.CharField(max_length=20, null=True, verbose_name='Color', blank=True)
+    estatus = models.CharField(max_length=20, null=True, verbose_name='Estatus', blank=True)
+    comentario = models.CharField(max_length=100, null=True, verbose_name='Comentario', blank=True)
+    url = models.CharField(max_length=128, verbose_name='Url', null=True, blank=True)
+    categoria = models.CharField(max_length=20, null=True, verbose_name='Comentario', blank=True)
+
+    def __str__(self):
+        return self.empleado_al
+
+    class Meta:
+        db_table = 'Agendarllamada'
+        verbose_name = 'Agendarllamada'
+        verbose_name_plural = 'Agendarllamada'
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['empleado_al'] = self.empleado_al.toJSON()
+        item['cliente_al'] = self.cliente_al.toJSON()
+        return item
+
+    class Cita(models.Model):
+        idCita = models.AutoField(primary_key=True, verbose_name='idCita')
+        empleado_c = models.ForeignKey(User, verbose_name='Empleado Cita', on_delete=models.PROTECT)
+        razonSocial = models.CharField(max_length=128, null=True, verbose_name='Razon Social', blank=True)
+        responsable = models.CharField(max_length=128, null=True, verbose_name='Responsable', blank=True)
+        fechaAgenda = models.DateTimeField(null=True, default=datetime.now, verbose_name='Fecha agenda')
+        fechaCita = models.DateTimeField(null=True, verbose_name='Fecha Cita')
+        color = models.CharField(max_length=20, null=True, verbose_name='Color', blank=True)
+        estatus = models.CharField(max_length=20, null=True, verbose_name='Estatus', blank=True)
+        url = models.CharField(max_length=50, verbose_name='Url', null=True, blank=True)
+
+        def __str__(self):
+            return self.empleado_c
+
+        class Meta:
+            db_table = 'Cita'
+            verbose_name = 'Cita'
+            verbose_name_plural = 'Citas'
+
+        def toJSON(self):
+            item = model_to_dict(self)
+            return item

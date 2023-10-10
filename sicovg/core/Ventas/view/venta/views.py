@@ -12,6 +12,7 @@ from django.views.generic import ListView, CreateView, UpdateView, TemplateView,
 from django.contrib import messages
 from core.principales.models import Clientes
 from core.Clientes.forms import ClienteForm
+from core.principales.models import Inventario
 from django.utils import timezone
 
 
@@ -55,6 +56,17 @@ class Ventaview(LoginRequiredMixin, FormView):
             data['error'] = 'No hay coincidencias'
         except Exception as e:
             data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+    def equipos(self, request, *args, **kwargs):
+        data = {}
+        action = request.POST['action']
+        if action == 'buscarEquipos':
+            data = []
+            for i in Inventario.objects.all():
+                data.append(i.toJSON())
+        else:
+            data['error'] = 'No se ha seleccionado alguna acción'
         return JsonResponse(data, safe=False)
 
     def get_context_data(self, **kwargs):
