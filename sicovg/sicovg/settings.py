@@ -47,6 +47,10 @@ INSTALLED_APPS = [
     'core.Proovedores',
     'core.Inventario',
     'core.Ventas',
+<<<<<<< HEAD
+=======
+    'core.Agendacalend',
+>>>>>>> 1ef6b05c7bc6d72365171c9ee0aa73d12317b7e9
 ]
 
 MIDDLEWARE = [

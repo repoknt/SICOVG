@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
+    <link rel="stylesheet"
+          href="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
+    <script src="{% static 'lib/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">Horizontal Form</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table class="table table-bordered" id="data">
+                <thead>
+                <th style="width: 20%">Razón Social</th>
+                <th style="width: 40%">Dirección</th>
+                <th style="width: 5%">Código Postal</th>
+                <th style="width: 20%">Correo</th>
+                <th style="width: 5%">Teléfono</th>
+                </thead>
+                <tbody>
+                {% for e in empresas %}
+                    <tr>
+                        <td>{{ e.razonSocial }}</td>
+                        <td>{{ e.domicilioFiscal }}</td>
+                        <td>{{ e.codigoPostal }}</td>
+                        <td>{{ e.email }}</td>
+                        <td>{{ e.telefono1 }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <a href="">Actualizar <i class="fas fa-refresh"></i></a>
+        </div>
+        <!-- /.card-footer -->
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script>
+        $('#data').DataTable({
+            autoWidth: false,
+            destroy: true,
+            deferRender: true,
+            scrollX: true,
+        });
+    </script>
+{% endblock %}

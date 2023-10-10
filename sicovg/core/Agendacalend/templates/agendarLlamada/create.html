@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
+    <!--<link rel="stylesheet" type="text/css" href="../../../../static/css/mystyle.css">-->
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
+    <script src="{% static 'lib/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'agendarLlamada/create.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-header col-bluest">
+            <h3 class="card-title"><i class="fas fa-share-square"></i> Agendar nueva llamada</h3>
+        </div>
+        <div class="card-body" style="display: block;">
+            <form action="." enctype="multipart/form-data" method="post">
+                <input type="hidden" name="action" id="action" class="form-control" value="{{ action }}">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="fechaLlamada" class="col-form-label">Fecha Llamada:</label>
+                        <input type="datetime-local" name="fechaLlamada" id="fechaLlamada" class="form-control" max="50" required>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="comentario" class="col-form-label">Notas:</label>
+                        <input type="text" name="comentario" id="comentario" class="form-control" max="50" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="categoria" class="col-form-label">Categoría:</label>
+                        <select name="categoria" id="categoria" class="form-control" required>
+                            <option value="Llamada">Llamada</option>
+                            <option value="Reunion">Reunion</option>
+                            <option value="Conferencia">Conferencia</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4 ">
+                    </div>
+                    
+                    <div class="form-group col-md-4 ">
+                        <label class="col-form-label">Guardar Cita:</label>
+                        <input type="submit" name="btnEnviar" id="btnEnviar" class="form-control btn btn-greent">
+                    </div>
+                    
+                
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
