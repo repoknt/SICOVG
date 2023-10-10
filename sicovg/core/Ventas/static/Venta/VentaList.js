@@ -45,96 +45,7 @@ $(function () {
         var correo = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         var social = /^.[a-zA-ZÀ-ÿ\s\d]{9,128}$/;
         var valCuenta = /^(\d|)*\.?(\d|)*\.?(\d)*\d$/;
-        if (valCuenta.test(document.getElementById('id_cuenta').value)) {
-            if (idCuent.test(document.getElementById('id_idCuenta').value)) {
-                if (curp.test(document.getElementById('id_RFC').value)) {
-                    if (correo.test(document.getElementById('id_email').value)) {
-                        if (nombres.test(document.getElementById('id_representanteLegal').value)) {
-                            if (telefono.test(document.getElementById('id_telefono1').value)) {
-                                if (telefono.test(document.getElementById('id_telefono2').value)) {
-                                    if (nombres.test(document.getElementById('id_personaAutorizada1').value)) {//
-                                        if (telefono.test(document.getElementById('id_telefonoPersonaAutorizada1').value)) {
-                                            if (nombres.test(document.getElementById('id_personaAutorizada2').value)) {//
-                                                if (telefono.test(document.getElementById('id_telefonoPersonaAutorizada2').value)) {
                                                     return true;
-                                                } else {
-                                                    Swal.fire({
-                                                        title: 'Error!',
-                                                        text: 'TelefonoPersonaAutorizada2 inválido',
-                                                        icon: 'error'
-                                                    });
-                                                }
-                                            } else {
-                                                Swal.fire({
-                                                    title: 'Error!',
-                                                    text: 'PersonaAutorizada2 inválido',
-                                                    icon: 'error'
-                                                });
-                                            }
-                                        } else {
-                                            Swal.fire({
-                                                title: 'Error!',
-                                                text: 'TelefonoPersonaAutorizada1 inválido',
-                                                icon: 'error'
-                                            });
-                                        }
-                                    } else {
-                                        Swal.fire({
-                                            title: 'Error!',
-                                            text: 'PersonaAutorizada1 inválido',
-                                            icon: 'error'
-                                        });
-                                    }
-                                } else {
-                                    Swal.fire({
-                                        title: 'Error!',
-                                        text: 'Teléfono2 inválido',
-                                        icon: 'error'
-                                    });
-                                }
-                            } else {
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Teléfono1 inválido',
-                                    icon: 'error'
-                                });
-                            }
-                        } else {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'Representante legal inválido',
-                                icon: 'error'
-                            });
-                        }
-                    } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Correo inválido',
-                            icon: 'error'
-                        });
-                    }
-                } else {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'RFC inválido',
-                        icon: 'error'
-                    });
-                }
-            } else {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Id de la Cuenta inválido, solo se permiten 9 números',
-                    icon: 'error'
-                });
-            }
-        } else {
-            Swal.fire({
-                title: 'Error!',
-                text: 'Cuenta inválida, no se permite letras',
-                icon: 'error'
-            });
-        }
-        return false;
     }
 
     // Boton submit del formulario, para petición con ajax
@@ -509,8 +420,8 @@ $(function () {
     }
 
 //funcion que muestra los registros en un select
-    function Productos(idInventario) {
-        var Productos = '<select class="form-group-sm" style="font-size: 10px; margin: 0px;"  name="equipo' + idInventario + '" id="equipo' + idInventario + '">';
+    function Productos(id) {
+        var Productos = '<select class="form-group-sm" style="font-size: 10px; margin: 0px;"  name="equipo' + id + '" id="equipo' + id + '">';
         for (const clave in selectEquipos) {
             Productos += '<option>' + selectEquipos[clave].modelo + '</option>';
 

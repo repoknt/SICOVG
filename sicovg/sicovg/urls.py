@@ -23,7 +23,6 @@ urlpatterns = [
     path('Proovedores/', include('core.Proovedores.urls')),
     path('Inventario/', include('core.Inventario.urls')),
     path('Ventas/', include('core.Ventas.urls')),
-
     path('Agendacalend/', include('core.Agendacalend.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

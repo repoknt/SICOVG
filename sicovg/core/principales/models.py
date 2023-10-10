@@ -79,10 +79,7 @@ class Inventario(models.Model):
 class Venta(models.Model):
     idVenta = models.AutoField(primary_key=True, verbose_name='idVenta')
     clienteId = models.ForeignKey(Clientes, verbose_name='idCliente', on_delete=models.PROTECT)
-<<<<<<< HEAD
     colaboradorId = models.ForeignKey(User, verbose_name=id, on_delete=models.PROTECT)
-=======
->>>>>>> 1ef6b05c7bc6d72365171c9ee0aa73d12317b7e9
     totalDeVentas = models.FloatField(max_length=50, verbose_name='Total de Venta', null=False)
     fechaDeCompra = models.DateField(default=date.today, verbose_name='Fecha de Compra', null=False)
     estatus = models.CharField(max_length=100, verbose_name='Estatus', null=False)
@@ -114,12 +111,7 @@ class DetalleVenta(models.Model):
     def toJSON(self):
         item = model_to_dict(self)
         return item
-<<<<<<< HEAD
 
-
-=======
-    
->>>>>>> 1ef6b05c7bc6d72365171c9ee0aa73d12317b7e9
 class Agendarllamada(models.Model):
     idAgenda = models.AutoField(primary_key=True, verbose_name='idAgenda')
     user_al = models.ForeignKey(User, verbose_name='Empleado Agenda', on_delete=models.PROTECT)
@@ -145,7 +137,6 @@ class Agendarllamada(models.Model):
         item['empleado_al'] = self.empleado_al.toJSON()
         item['cliente_al'] = self.cliente_al.toJSON()
         return item
-<<<<<<< HEAD
 
     class Cita(models.Model):
         idCita = models.AutoField(primary_key=True, verbose_name='idCita')
@@ -169,8 +160,7 @@ class Agendarllamada(models.Model):
         def toJSON(self):
             item = model_to_dict(self)
             return item
-=======
-    
+
 class Cita(models.Model):
     idCita = models.AutoField(primary_key=True, verbose_name='idCita')
     empleado_c = models.ForeignKey(User, verbose_name='Empleado Cita', on_delete=models.PROTECT)
@@ -274,4 +264,3 @@ class EmpresaDN(models.Model):
         item = model_to_dict(self)
         item['empresa'] = self.empresa.toJSON()
         return item
->>>>>>> 1ef6b05c7bc6d72365171c9ee0aa73d12317b7e9
