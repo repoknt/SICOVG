@@ -1,0 +1,113 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+     <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
+    <link rel="stylesheet"
+          href="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
+    <script src="{% static 'lib/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+    <link rel='stylesheet' href="{% static 'lib/fullcalendar/lib/main.css' %}"/>
+    <script src="{% static 'lib/fullcalendar/lib/main.js' %}"></script>
+    <script src="{% static 'lib/fullcalendar/lib/locales-all.js' %}"></script>
+    
+           
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+           var calendarUI = document.getElementById('calendar')
+           var calendar = new FullCalendar.Calendar(calendarUI, {
+               initialView: 'dayGridMonth',
+               headerToolbar: {
+                   left: 'prev,next today',
+                   center:'title'
+               },
+               events: [
+                   {% for c in cal %}
+                       {
+                           //Lo que está dentro de las llaves son los nombes de los campos en la BD
+                           title: "{{ c.razonSocial }}",
+                           start: '{{ c.fechaLlamada | date:"Y-m-d H:i:s"}}',
+                           url: "{{ c.url }}",
+                           color: "{{ c.color }}",
+                       },
+                   {% endfor %}
+               ]
+           });
+           calendar.render();
+           //ponerlo en español
+           calendar.setOption('locale','es');
+        });
+        
+    function toggleCalendario() {
+        var calendarUI = document.getElementById('calendar');
+        if (calendarUI.style.display === 'none' || calendarUI.style.display === '') {
+            calendarUI.style.display = 'block'; // Mostrar el calendario
+        } else {
+            calendarUI.style.display = 'none';  // Ocultar el calendario
+        }
+    }
+    </script>
+{% endblock head %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Eventos del Día de Hoy</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha llamada</th>
+                <th>Razon social</th>
+                <th>Estatus</th>
+                <th>Comentario</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in calen %}
+                {% if fechaLlamada.date == today.date %}
+                    <tr data-id="{{ c.idAgenda }}">
+                        <td>{{ c.fechaLlamada }}</td>
+                        <td>{{ c.razonSocial }}</td>
+                        <td>{{ c.estatus }}</td>
+                        <td>{{ c.comentario }}</td>
+                        <td>{{ c.categoria }}</td>
+                        
+                        <td><a href="../eliminacionid/{{c.idAgenda}}" class="btn btn-danger">eliminar</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+<button type="button" class="btn btn-primary" onclick="toggleCalendario()">
+    Mostrar/Ocultar Calendario
+</button>
+
+<div id="calendar">
+
+    <div class="row">
+        <div class="form-group col-md-2">
+        </div>
+        <div class="form-group col-md-12">
+            <div class="card">
+                <div class="card-header col-greent">
+                    <h3 class="card-title"><i class="fas fa-calendar-plus"></i> {{ title }}</h3>
+                </div>
+                <div class="card-body">
+                    <form action="." method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ action }}" name="action" id="action">
+                        <div class="form-group">
+                        </div>
+                    </form>
+                </div>
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block extrajs %}
+{% endblock extrajs %}

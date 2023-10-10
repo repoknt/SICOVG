@@ -87,6 +87,33 @@
                         </a>
                     </li>
                 </div>
+                <a class="btn" style="border-block-color:#818092" data-toggle="collapse" href="#Agendacalend"
+                role="button" aria-expanded="false" aria-controls="Agendacalend">
+    <p class="text-left" style="color: white">
+        <i class="fa-solid fa-book"></i> Agenda
+    </p>
+</a>
+
+<div class="collapse" id="Agendacalend">
+    <li class="nav-item">
+        <a href="{% url 'Agendacalend:empresa_datelle_cuenta' %}" class="nav-link">
+            <i class="fa-solid fa-feather"></i>
+            <p>
+                Agendar cita
+            </p>
+        </a>
+    </li>
+             </div>
+              <div class="collapse" id="Agendacalend">
+                 <li class="nav-item">
+                     <a href="{% url 'Agendacalend:c_llamada' %}" class="nav-link">
+                        <i class="fa-solid fa-calendar-days"></i>
+                         <p>
+                            calendario
+                         </p>
+                     </a>
+                 </li>
+             </div>
             </ul>
         </nav>
     </div>

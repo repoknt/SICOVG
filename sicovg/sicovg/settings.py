@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'core.Proovedores',
     'core.Inventario',
     'core.Ventas',
-  
+    'core.Agendacalend',
 ]
 
 MIDDLEWARE = [
