@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
+    <link rel="stylesheet"
+          href="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
+    <script src="{% static 'lib/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'asistencia/asistencia.js' %}"></script>
+{% endblock %}
+{% block pantallaDeCarga %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="form-group col-md-2">
+        </div>
+        <div class="card  col-8">
+            <div class="card-header col-greent">
+                <h3 class="card-title"><i class="fas fa-list-ul"></i> {{ title }}</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" action="." enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" value="guardar" id="action" name="action">
+                    <table class="table table-bordered" id="tblOrdenes" class="display nowrap">
+                        <thead>
+                        <tr style="font-size: 14px;">
+                            <th style="width: 8%;">ID</th>
+                            <th style="width: 8%;">NOMBRE</th>
+                            <th style="width: 8%;">GUARDAR</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for o in ordenes %}
+                            <tr style="font-size: 13px;">
+                                <td>{{ o.id }}</td>
+                                <td>{{ o.em }}</td>
+                                    <td><a href="#!" rel="asistencia" title="Asistencia"
+                                       class="btn btn-greent btn-x btn-flat">Asistencia</a>
+                                    <a href="#!" rel="retardo" title="Retardo"
+                                       class="btn btn-yellowt btn-x btn-flat">Retardo</a>
+                                    <a href="#!" rel="justificada" title="Justificada"
+                                       class="btn btn-secondary btn-x btn-flat"> Justificada </a>
+                                    <a href="#!" rel="falta" title="Falta" class="btn btn-redt btn-x btn-flat">Falta</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <p align="left">
+                        <a href="/rh/asistencia/asistenciaReporte/" title="Create" class="btn btn-bluest btn-x btn-flat">Reporte
+                            Mensual</a>
+                       
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

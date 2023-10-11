@@ -77,4 +77,4 @@ class Ventaview(LoginRequiredMixin, FormView):
 
 
 
-class NuevaVenta
+#class NuevaVenta

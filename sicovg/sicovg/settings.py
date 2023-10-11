@@ -47,7 +47,14 @@ INSTALLED_APPS = [
     'core.Proovedores',
     'core.Inventario',
     'core.Ventas',
+<<<<<<< HEAD
+    'core.rh',
+    
+
+  
+=======
     'core.Agendacalend',
+>>>>>>> 47bb82c21c292ee978942ab68729f225109cc2d4
 ]
 
 MIDDLEWARE = [
@@ -97,6 +104,7 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
             'sql_mode': 'traditional',
+
         }
     }
 }
