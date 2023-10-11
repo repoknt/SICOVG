@@ -19,6 +19,7 @@ $(function () {
         },
         columns: [
             {"data": "idCliente"},
+            {"data": "cuenta"},
             {"data": "razonSocial"},
             {"data": "RFC"},
             {"data": "email"},
@@ -26,13 +27,13 @@ $(function () {
         ],
         columnDefs: [
             {
-                targets: [4],
+                targets: [5],
                 class: 'text-center',
                 orderable: false,
 
             },
             {
-                targets: [5],
+                targets: [6],
                 class: 'text-center',
                 orderable: false,
                 render: function (data, type, row) {

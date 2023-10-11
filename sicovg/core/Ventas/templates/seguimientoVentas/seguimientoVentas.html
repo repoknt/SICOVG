@@ -94,7 +94,7 @@
             </div>
         </div>
     </div>
-    
+    <hr>
 
     {# TABLA DEL BOTON BUSCAR#}
     <div class="card">
@@ -106,12 +106,13 @@
                 <thead>
                 <h5 style="text-align: center"><b id="tipoTabla"></b></h5>
                 <tr style="font-size: 15px;">
+                    <th style="width: 4%;">ID Venta</th>
                     <th style="width: 20%;">Razón Social</th>
-                    <th style="width: 8%;">Cuenta</th>
                     <th style="width: 8%;">RFC</th>
                     <th style="width: 8%;">Numero</th>
                     <th style="width: 20%;">Comentario</th>
-                    <th style="width: 8%;">Estatus</th>
+                    <th style="width: 8%; ">Estatus</th>
+                    <th style="width: 8%; ">Cancelar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -121,4 +122,95 @@
     </div>
  
 
+<!-- Modal -->
+<div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cambio de Estatus</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+
+
+
+
+
+
+
+        
+      </div>
+      <div class="modal-body">
+        <!-- Agrega los datos de la empresa -->
+        <div class="form-group">
+          <label for="razonSocial">Razón Social:</label>
+          <input type="text" class="form-control" id="razonSocial" readonly>
+        </div>
+        <div class="form-group">
+          <label for="rfc">RFC:</label>
+          <input type="text" class="form-control" id="rfc" readonly>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono:</label>
+          <input type="text" class="form-control" id="telefono" readonly>
+        </div>
+<!-- Ocultar Estatius y id de venta -->
+        <div class="form-group" style="display: none;">
+            <label for="estatus">Estatus:</label>
+            <input type="text" class="form-control" id="estatus" readonly>
+        </div>
+        <div class="form-group" style="display: none;">
+            <label for="idVenta">ID Venta:</label>
+            <input type="text" class="form-control" id="idVenta" readonly>
+        </div>
+
+        
+        <!-- Agrega un cuadro de texto para el comentario -->
+        <div class="form-group">
+          <label for="comentarioTextarea">Comentario</label>
+          <textarea class="form-control" id="comentarioTextarea" rows="3"></textarea>
+        </div>
+        
+      </div>
+
+
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="guardarCambios">Guardar cambios</button>
+   </div>
+   
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Agrega esto a tu HTML, preferiblemente al final del body -->
+<div class="modal fade" id="comentarioModal" tabindex="-1" role="dialog" aria-labelledby="comentarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="comentarioModalLabel">Comentario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label for="comentarioTextareaModal">Comentario:</label>
+          <textarea class="form-control" id="comentarioTextareaModal" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="guardarComentario">Guardar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
 {% endblock %}

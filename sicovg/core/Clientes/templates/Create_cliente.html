@@ -21,6 +21,10 @@
             <label>{{ form.razonSocial.label }}</label>
             {{ form.razonSocial|add_class:'form-control'| attr:'' |attr:'autocomplete:off'|attr:'placeholder:Ingrese la razón social'|attr:'onkeyup:javascript:this.value = this.value.toUpperCase();'|attr:'required' }}
         </div>
+         <div class="form-group col-md-3">
+            <label>{{ form.cuenta.label }}</label>
+            {{ form.cuenta|add_class:'form-control'| attr:'' |attr:'autocomplete:off'|attr:'placeholder:Ingrese el numero de cuenta'|attr:'onkeyup:javascript:this.value = this.value.toUpperCase();'|attr:'required'|attr:'maxlength:6' }}
+        </div>
         <div class="form-group col-md-3">
             <label>{{ form.RFC.label }}</label>
             {{ form.RFC|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese el RFC'|attr:'onkeyup:javascript:this.value = this.value.toUpperCase();'|attr:'required'|attr:'minlength:10'|attr:'maxlength:13' }}
@@ -62,10 +66,9 @@
         </div>
         <div class="form-group col-md-3">
             <label>{{ form.telefono.label }}</label>
-            {{ form.telefono|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese el telefono 2'|attr:'required' }}
+            {{ form.telefono|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese el telefono'|attr:'required' }}
         </div>
     </div>
 {% endblock %}
 {% block AJAX %}
-
 {% endblock %}
