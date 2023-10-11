@@ -74,3 +74,7 @@ class Ventaview(LoginRequiredMixin, FormView):
         context['title'] = 'Ventas'
         context['name'] = 'Cliente'
         return context
+
+
+
+class NuevaVenta
