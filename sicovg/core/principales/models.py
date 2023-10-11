@@ -2,6 +2,7 @@ from django.db import models
 from django.forms import model_to_dict
 from datetime import datetime
 from datetime import date
+from core.login.models import User
 
 
 class Clientes(models.Model):
@@ -110,3 +111,44 @@ class DetalleVenta(models.Model):
     def toJSON(self):
         item = model_to_dict(self)
         return item
+
+
+class Asistencia(models.Model):
+    idAsistencia = models.AutoField(primary_key=True, verbose_name="idAsistencia")
+    colaborador = models.ForeignKey(User, verbose_name='idColaborador', on_delete=models.PROTECT, related_name='idColaborador')
+    fechaAsistencia = models.DateField(default=datetime.now, verbose_name="Fecha Asistencia", null=True, blank=True)
+    estatus = models.CharField(max_length=100, verbose_name='estatus', null=True, blank=True)
+
+
+    class Meta:
+        db_table = 'Asistencia'
+        verbose_name = 'Asistencia'
+        verbose_name_plural = 'Asistencias'
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        return item    
+    
+
+class PermisoInasistencia(models.Model):
+    idPermiso = models.AutoField(primary_key=True, verbose_name="idPermiso")
+    empleadoo = models.ForeignKey(User, verbose_name='idEmpleadoo', on_delete=models.PROTECT, related_name='idEmpleadoo')
+    fechaInasistencia = models.DateField(default=datetime.now, verbose_name='Fecha Inisistencia', null=True, blank=True)
+    motivo = models.CharField(max_length=256, verbose_name="Motivo", null=False, default="", blank=True)
+    comentario = models.CharField(max_length=256, verbose_name="Comentario", null=True, blank=True)
+    estatus = models.CharField(max_length=64, verbose_name="Estatus", default="PENDIENTE", null=False)
+    fechaCreacion = models.DateField(default=datetime.now, verbose_name='Fecha Creacion', null=True, blank=True)
+
+    def __str__(self):
+        return self.empleadoo.last_name
+
+    class Meta:
+        db_table = 'PermisoInasistencia'
+        verbose_name = 'PermisoInasistencia'
+        verbose_name_plural = 'PermisoInasistencias'
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['empleado'] = self.empleadoo.toJSON()
+        return item
+    

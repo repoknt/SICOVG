@@ -87,6 +87,38 @@
                         </a>
                     </li>
                 </div>
+
+
+                <a class="btn" style="border-block-color:#818092" data-toggle="collapse" href="#collapseRH"
+                role="button" aria-expanded="false" aria-controls="collapseExample">
+                 <p class="text-left" style="color: white">
+                    <i class="fa-solid fa-user-check"></i> Capital Humano
+                 </p>
+             </a>
+             <div class="collapse" id="collapseRH">
+                <li class="nav-item">
+                    <a href="{% url 'rh:asistencia' %}" class="nav-link">
+                        <i class="fa-solid fa-list-check"></i>
+                        <p>
+                            Asistencia
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'rh:permisoInasistencia' %}" class="nav-link">
+                        <i class="fa-solid fa-list-check"></i>
+                        <p>
+                            Permiso Inasistencia
+                        </p>
+                    </a>
+                </li>
+                 
+             </div>
+
+
+
+
+
             </ul>
         </nav>
     </div>

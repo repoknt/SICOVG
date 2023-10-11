@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'core.Proovedores',
     'core.Inventario',
     'core.Ventas',
+    'core.rh',
+    
+
   
 ]
 
@@ -97,6 +100,7 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
             'sql_mode': 'traditional',
+
         }
     }
 }
