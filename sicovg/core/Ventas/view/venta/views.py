@@ -76,5 +76,5 @@ class Ventaview(LoginRequiredMixin, FormView):
         return context
 
 
-
-#class NuevaVenta
+class NuevaVenta(LoginRequiredMixin, TemplateView):
+    template_name = 'Venta/OrdenVenta.html'

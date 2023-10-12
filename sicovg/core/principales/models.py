@@ -115,10 +115,10 @@ class DetalleVenta(models.Model):
 
 class Asistencia(models.Model):
     idAsistencia = models.AutoField(primary_key=True, verbose_name="idAsistencia")
-    colaborador = models.ForeignKey(User, verbose_name='idColaborador', on_delete=models.PROTECT, related_name='idColaborador')
+    colaborador = models.ForeignKey(User, verbose_name='idColaborador', on_delete=models.PROTECT,
+                                    related_name='idColaborador')
     fechaAsistencia = models.DateField(default=datetime.now, verbose_name="Fecha Asistencia", null=True, blank=True)
     estatus = models.CharField(max_length=100, verbose_name='estatus', null=True, blank=True)
-
 
     class Meta:
         db_table = 'Asistencia'
@@ -127,12 +127,13 @@ class Asistencia(models.Model):
 
     def toJSON(self):
         item = model_to_dict(self)
-        return item    
-    
+        return item
+
 
 class PermisoInasistencia(models.Model):
     idPermiso = models.AutoField(primary_key=True, verbose_name="idPermiso")
-    empleadoo = models.ForeignKey(User, verbose_name='idEmpleadoo', on_delete=models.PROTECT, related_name='idEmpleadoo')
+    empleadoo = models.ForeignKey(User, verbose_name='idEmpleadoo', on_delete=models.PROTECT,
+                                  related_name='idEmpleadoo')
     fechaInasistencia = models.DateField(default=datetime.now, verbose_name='Fecha Inisistencia', null=True, blank=True)
     motivo = models.CharField(max_length=256, verbose_name="Motivo", null=False, default="", blank=True)
     comentario = models.CharField(max_length=256, verbose_name="Comentario", null=True, blank=True)
@@ -151,7 +152,7 @@ class PermisoInasistencia(models.Model):
         item = model_to_dict(self)
         item['empleado'] = self.empleadoo.toJSON()
         return item
-    
+
 
 class Agendarllamada(models.Model):
     idAgenda = models.AutoField(primary_key=True, verbose_name='idAgenda')
@@ -179,28 +180,6 @@ class Agendarllamada(models.Model):
         item['cliente_al'] = self.cliente_al.toJSON()
         return item
 
-    class Cita(models.Model):
-        idCita = models.AutoField(primary_key=True, verbose_name='idCita')
-        empleado_c = models.ForeignKey(User, verbose_name='Empleado Cita', on_delete=models.PROTECT)
-        razonSocial = models.CharField(max_length=128, null=True, verbose_name='Razon Social', blank=True)
-        responsable = models.CharField(max_length=128, null=True, verbose_name='Responsable', blank=True)
-        fechaAgenda = models.DateTimeField(null=True, default=datetime.now, verbose_name='Fecha agenda')
-        fechaCita = models.DateTimeField(null=True, verbose_name='Fecha Cita')
-        color = models.CharField(max_length=20, null=True, verbose_name='Color', blank=True)
-        estatus = models.CharField(max_length=20, null=True, verbose_name='Estatus', blank=True)
-        url = models.CharField(max_length=50, verbose_name='Url', null=True, blank=True)
-
-        def __str__(self):
-            return self.empleado_c
-
-        class Meta:
-            db_table = 'Cita'
-            verbose_name = 'Cita'
-            verbose_name_plural = 'Citas'
-
-        def toJSON(self):
-            item = model_to_dict(self)
-            return item
 
 class Cita(models.Model):
     idCita = models.AutoField(primary_key=True, verbose_name='idCita')
@@ -224,7 +203,8 @@ class Cita(models.Model):
     def toJSON(self):
         item = model_to_dict(self)
         return item
-    
+
+
 class Llamadas(models.Model):
     idLlamada = models.AutoField(primary_key=True, verbose_name='idLlamada')
     empleado = models.ForeignKey(User, verbose_name='idEmpleado', on_delete=models.PROTECT)
@@ -243,6 +223,8 @@ class Llamadas(models.Model):
         item = model_to_dict(self)
         item['empleado'] = self.empleado.toJSON()
         return item
+
+
 class EmpresaAsignada(models.Model):
     idAsignacion = models.AutoField(primary_key=True, verbose_name='idAsignacion')
     empresa = models.ForeignKey(Clientes, verbose_name='idEmpresa', on_delete=models.PROTECT)
@@ -250,7 +232,6 @@ class EmpresaAsignada(models.Model):
     comentario = models.CharField(verbose_name='Comentario', max_length=128, default='PROPIA')
     fechaAsignada = models.DateField(default=datetime.now, verbose_name='Fecha Asignación', null=True, blank=True)
     estatus = models.CharField(verbose_name='Estatus', max_length=15, default='SIN ESTATUS')
-    
 
     def __str__(self):
         return self.empleado.username
@@ -265,6 +246,8 @@ class EmpresaAsignada(models.Model):
         item['empresa'] = self.empresa.toJSON()
         item['empleado'] = self.empleado.toJSON()
         return item
+
+
 class PermisosEdicion(models.Model):
     idPermiso = models.AutoField(primary_key=True, verbose_name='idPermiso')
     empresa = models.ForeignKey(Clientes, verbose_name='idEmpresa', on_delete=models.PROTECT)
@@ -287,6 +270,8 @@ class PermisosEdicion(models.Model):
         item['empresa'] = self.empresa.toJSON()
         item['empleado'] = self.empleado.toJSON()
         return item
+
+
 class EmpresaDN(models.Model):
     idEmpresaDN = models.AutoField(primary_key=True, verbose_name='idEmpresaDN')
     empresa = models.ForeignKey(Clientes, verbose_name='idEmpresa', on_delete=models.PROTECT)
