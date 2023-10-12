@@ -245,7 +245,7 @@ $(function () {
         });
     $('#valor').on('change', function (){
         var valor= document.getElementById('valor').value;
-        document.getElementById('agenda').setAttribute("href","/erp/agendarLlamada/create/"+valor+"/")
+        document.getElementById('agenda').setAttribute("href","/Agendacalend/agendarLlamada/create/"+valor+"/")
     });
     $('#agenda').on('click', function () {
         agendarLlamada();

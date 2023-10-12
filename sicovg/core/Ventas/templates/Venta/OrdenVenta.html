@@ -9,12 +9,12 @@
     <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
     <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
 
-    <script src="{% static 'ordenes/js/detalleOrden.js' %}"></script>
+    <script src="{% static 'Venta/OrdenVenta.js' %}"></script>
 {% endblock %}
 {% block content %}
     {#    Card de Control de Búsqueda  #}
     <div class="card">
-        <div class="card-header">
+        <div class="card-header col-greent">
             <h3 class="card-title">
                 <i class="fas fa-search"></i>
                 Control de Búsqueda
@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <h5>Datos de Cuenta:</h5>
-                    <p class="card-text">Cuenta <b>{{ empresa.cuenta }}</b></p>
+                    <p class="card-text">Cuenta <b>{{ empresa.idCliente }}</b></p>
                     <p class="card-text">Id de Cuenta <b>{{ empresa.idCuenta }}</b></p>
                     <p class="card-text">Razón Social: <b>{{ empresa.razonSocial }}</b></p>
                     <p class="card-text">Tipo Cliente <b>{{ empresa.tipoCliente }}</b></p>
@@ -60,34 +60,6 @@
     </div>
     <form method="POST" action="." enctype="multipart/form-data">
         <input type="hidden" value="formatoEntrega" name="action" id="action">
-        <div class="card card-info">
-            <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-user"></i> Datos del Cliente</h3>
-            </div>
-            <div class="card-body" style="display: block;">
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="identificacion" class="col-form-label">Identifiacion Oficial</label>
-                        <select name="identificacion" id="identificacion" class="form-control" required="">
-                            <option value="INE">INE</option>
-                            <option value="IFE">IFE</option>
-                            <option value="FM1">FM1</option>
-                            <option value="FM2">FM2</option>
-                            <option value="FM3">FM3</option>
-                            <option value="PASAPORTE">PASAPORTE</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="numIden" class="col-form-label">Número de Identificación</label>
-                        <input type="text" value="" id="numIden" name="numIden" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="comentario" class="col-form-label">Comentario</label>
-                        <textarea name="comentario" id="comentario" required class="form-control"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card">
             <div class="card-header">
                 <h3 class="text-center">Orden</h3>

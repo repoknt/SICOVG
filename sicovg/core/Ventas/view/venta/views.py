@@ -78,3 +78,5 @@ class Ventaview(LoginRequiredMixin, FormView):
 
 class NuevaVenta(LoginRequiredMixin, TemplateView):
     template_name = 'Venta/OrdenVenta.html'
+
+
