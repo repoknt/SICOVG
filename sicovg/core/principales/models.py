@@ -112,7 +112,6 @@ class DetalleVenta(models.Model):
         item = model_to_dict(self)
         return item
 
-<<<<<<< HEAD
 
 class Asistencia(models.Model):
     idAsistencia = models.AutoField(primary_key=True, verbose_name="idAsistencia")
@@ -153,7 +152,7 @@ class PermisoInasistencia(models.Model):
         item['empleado'] = self.empleadoo.toJSON()
         return item
     
-=======
+
 class Agendarllamada(models.Model):
     idAgenda = models.AutoField(primary_key=True, verbose_name='idAgenda')
     user_al = models.ForeignKey(User, verbose_name='Empleado Agenda', on_delete=models.PROTECT)
@@ -306,4 +305,3 @@ class EmpresaDN(models.Model):
         item = model_to_dict(self)
         item['empresa'] = self.empresa.toJSON()
         return item
->>>>>>> 47bb82c21c292ee978942ab68729f225109cc2d4

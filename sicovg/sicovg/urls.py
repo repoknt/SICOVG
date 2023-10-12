@@ -25,6 +25,4 @@ urlpatterns = [
     path('Ventas/', include('core.Ventas.urls')),
     path('rh/', include('core.rh.urls')),
     path('Agendacalend/', include('core.Agendacalend.urls')),
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ]
