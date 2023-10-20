@@ -20,7 +20,6 @@ class SeguimientoVentas(LoginRequiredMixin, TemplateView):
             'comentario',
             'estatus'
 )
-    
         elif boton == 'espera_pago':
             ventas = Venta.objects.select_related('clienteId').filter(estatus='En espera de pago').values(
         'idVenta', 

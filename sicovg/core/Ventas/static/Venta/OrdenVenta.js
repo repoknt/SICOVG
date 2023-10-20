@@ -57,7 +57,7 @@ $(function () {
                         }
                         input = '<input type="text" readonly style="padding: 0px;font-size: 15px;width: 170px;" value="' + data + '" class="form-control" name="mov' + i.row + '" id="mov' + i.row + '">';
                     } else {
-                        input = '<input type="text" readonly style="padding: 0px;font-size: 15px;width: 170px;" value="         NUEVA VENTA   " class="form-control" name="mov' + i.row + '" id="mov' + i.row + '">';
+                        input = '<input type="text" readonly style="padding: 0px;font-size: 15px;width: 170px;" value="ADICION" class="form-control" name="mov' + i.row + '" id="mov' + i.row + '">';
                     }
                     return input;
                 },
@@ -523,6 +523,11 @@ $(function () {
 
     function validarBotonGuardarOden() {
         var boton = document.getElementById('btnGuardar');
+        if (validarBotones < 2) {
+            boton.disabled = true;
+        } else {
+            boton.disabled = false;
+        }
     }
 
     validarBotonGuardarOden();

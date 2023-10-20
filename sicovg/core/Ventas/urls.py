@@ -5,10 +5,9 @@ from core.Ventas.view.seguimientoVentas.guardaCambios import guardar_cambios
 from core.Ventas.view.seguimientoVentas.guardarComentario import guardarComentario
 from core.Ventas.view.seguimientoVentas.buscarDatos import buscar_datos
 from core.Ventas.view.venta.views import Ventaview
-from core.Ventas.view.venta.views import NuevaVenta
+from core.Ventas.view.venta.OrdenVenta import NuevaVenta
 
 app_name = 'Ventas'
-
 
 
 
