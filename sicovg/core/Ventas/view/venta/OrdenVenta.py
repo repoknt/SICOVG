@@ -24,8 +24,8 @@ class NuevaVenta(LoginRequiredMixin, TemplateView):
     def dispatch(self, request, *args, **kwargs):
         cuenta = kwargs['cuenta']  # Obteniendo el valor de 'cuenta' desde la URL
         self.Clientes = self.get_object(cuenta)
-        self.idClientes = self.Clientes.toJSON()['cuenta']
-        self.encargado = Clientes.objects.get(cuenta=self.idClientes)
+        self.idCliente = self.Clientes.toJSON()['cuenta']
+        self.encargado = Clientes.objects.get(cuenta=self.idCliente)
         return super().dispatch(request, *args, **kwargs)
     def get_object(self, cuenta):
         try:
@@ -43,39 +43,6 @@ class NuevaVenta(LoginRequiredMixin, TemplateView):
             for i in Inventario.objects.all().order_by('NombresProducto'):
                 data.append(i.toJSON())
         elif action == 'guardarOrden':
-                tamanio = round((len(request.POST) - 6) / 12)
-                return self.guardarOrden(request, tamanio)
 
-        else:
             data['error'] = 'No se ha seleccionado alguna acción'
         return JsonResponse(data, safe=False)
-
-    def guardarOrden(self, request, tamanio):
-        # Recorremos el diccionario con elt amaño apropiado
-        for i in range(0, int(tamanio)):
-            # Extraemos el plan
-            plan = self.extraerPlan(request.POST['plan' + str(i)])
-            # Si es una renovación se hara edicion
-            dn = request.POST['dn' + str(i)]
-            equipo = request.POST['equipo' + str(i)]
-            color = request.POST['color' + str(i)]
-            plazo = request.POST['plazo' + str(i)]
-            addon = request.POST['addon' + str(i)]
-            if request.POST['mov' + str(i)] == 'RENOVACION':
-                folioGenerado = self.guardarRenovacion(dn, equipo, color, plan, plazo,  addon, 'PROCESO',
-                                                       )
-            elif request.POST['mov' + str(i)] == 'ADICION':
-                folioGenerado = self.guardarAdicion(request.user, equipo, color, plan, plazo, addon,
-                                                    'PROCESO', )
-            elif request.POST['mov' + str(i)] == 'RECHAZO DE ALMACEN':
-                rechazoDeAlmacen = self.cambioEquipo(dn, equipo, color, plan, plazo, addon,)
-                # redireccionar a la vista de EDITAR EXPEDIENTE
-        if rechazoDeAlmacen:
-            return redirect('/erp/empresa/orden/updateExpediente/{}/'.format(rechazoDeAlmacen.folio))
-        else:
-            cambio = Clientes.objects.get(empresa_id=str(self.idClientes))
-            cambio.estatus = 'ORDEN ABIERTA'
-            cambio.save()
-            return redirect('/erp/empresa/orden/expediente/{}/'.format(folioGenerado.folio))
-
-

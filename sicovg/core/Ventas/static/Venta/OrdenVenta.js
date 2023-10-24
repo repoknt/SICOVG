@@ -24,10 +24,10 @@ $(function () {
             {"data": ""}, // Movimiento -10
             {"data": "movimiento"}, // Movimiento -9
             {"data": ""}, // Equipo -6
-            {"data": ""}, // Equipo -6
             {"data": ""}, // Color -5
             {"data": ""},// plan -4
             {"data": ""}, // DE sin iva -2
+            {"data": ""}, // Comentario -2
             {"data": ""}, //X -1
         ],
         columnDefs: [
@@ -49,9 +49,9 @@ $(function () {
                         if (row.estatusReal === "RECHAZO DE ALMACEN") {
                             data = "RECHAZO DE ALMACEN";
                         }
-                        input = '<input type="text" readonly style="padding: 0px;font-size: 15px;width: 170px;" value="' + data + '" class="form-control" name="mov' + i.row + '" id="mov' + i.row + '">';
+                        input = '<input type="text" readonly  style="padding: 0px;font-size: 15px;width: 170px;" value="' + data + '" class="form-control" name="mov' + i.row + '" id="mov' + i.row + '">';
                     } else {
-                        input = '<input type="text" readonly style="padding: 0px;font-size: 15px;width: 170px;" value="                Venta" class="form-control" name="mov' + i.row + '" id="mov' + i.row + '">';
+                        input = '<input type="text" readonly style="padding: 0px;font-size: 15px;width: 170px;" value="            pendiente" class="form-control" name="mov' + i.row + '" id="mov' + i.row + '">';
                     }
                     return input;
                 },
@@ -70,38 +70,28 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row, i) {
                     if (data) {
-                        var input = '<input type="text"  readonly value="' + data + '" style="padding: 0px;" class="form-control input-sm" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
+                        var input = '<input type="text" readonly  value="' + data + '" style="padding: 0px;" class="form-control input-sm" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
                     } else {
-                        var input = '<input type="text"  readonly value="" style="padding: 0px;" class="form-control input-sm" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
+                        var input = '<input type="text" readonly value="" style="padding: 0px;" class="form-control input-sm" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
                     }
                     return input;
                 },
             },
-            {
-                targets: [-4],
-                class: 'text-center',
-                orderable: false,
-                render: function (data, type, row, i) {
-                    var input = "";
-                    input = '<input class="form form-control" value="0" type="text" name="IVA' + i.row + '" id="IVA' + i.row + '" style="padding: 0px;width:75px;" required>';
-                    return input;
-                },
-            },
+{
+    targets: [-4],
+    class: 'text-center',
+    orderable: false,
+    render: function (data, type, row, i) {
+        if (data) {
+            var input = '<input type="number" value="' + data + '" min="0" style="padding: 0px;" class="form-control input-sm cantidad" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
+        } else {
+            var input = '<input type="number" value="" min="0" style="padding: 0px;" class="form-control input-sm cantidad" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
+        }
+        return input;
+    },
+},
             {
                 targets: [-3],
-                class: 'text-center',
-                orderable: false,
-               render: function (data, type, row, i) {
-                    if (data) {
-                        var input = '<input type="text"  readonly value="' + data + '" style="padding: 0px;" class="form-control input-sm" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
-                    } else {
-                        var input = '<input type="text"  readonly value="" style="padding: 0px;" class="form-control input-sm" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
-                    }
-                    return input;
-                },
-            },
-            {
-                targets: [-2],
                 class: 'text-center',
                 orderable: false,
             render: function (data, type, row, i) {
@@ -109,6 +99,19 @@ $(function () {
                         var input = '<input type="text"  readonly value="' + data + '" style="padding: 0px;" class="form-control input-sm" name="Descripcion' + i.row + '" id="Descripcion' + i.row + '">';
                     } else {
                         var input = '<input type="text"  readonly value="" style="padding: 0px;" class="form-control input-sm" name="Descripcion' + i.row + '" id="Descripcion' + i.row + '">';
+                    }
+                    return input;
+                },
+            },
+             {
+                targets: [-2],
+                class: 'text-center',
+                orderable: false,
+            render: function (data, type, row, i) {
+                    if (data) {
+                        var input = '<input type="text"   value="' + data + '" style="padding: 0px;" class="form-control input-sm" name="Descripcion' + i.row + '" id="Descripcion' + i.row + '">';
+                    } else {
+                        var input = '<input type="text"   value="" style="padding: 0px;" class="form-control input-sm" name="Descripcion' + i.row + '" id="Descripcion' + i.row + '">';
                     }
                     return input;
                 },
@@ -197,17 +200,33 @@ $(function () {
 
 //funcion que muestra los registros en un select
     function Productos(id) {
-        var Productos = '<select class="form-group-sm" style="font-size: 15px; margin: 1px;"  name="producto' + id + '" id="producto' + id + '">';
-        for (const clave in selectEquipos) {
-            Productos += '<option>' + selectEquipos[clave].NombresProducto + '</option>';
-        }
-        Productos += '</select>';
-        return Productos;
+    var Productos = '<select class="form-group-sm producto-select" style="font-size: 15px; margin: 1px;"  name="producto' + id + '" id="producto' + id + '">';
+    for (const clave in selectEquipos) {
+        Productos += '<option data-precio="' + selectEquipos[clave].PrecioUnitario + '">' + selectEquipos[clave].NombresProducto + '</option>';
     }
+    Productos += '</select>';
+    return Productos;
+}
+$(document).on('change', '.producto-select', function() {
+    var selectedOption = $(this).find(':selected');
+    var precioUnitario = selectedOption.data('precio');
+    var id = $(this).attr('id').replace('producto', '');
+    var totalP = // Obtén el número de fila
+    $('#plazoF' + id).val(precioUnitario);
+});
+    $(document).on('change', '.cantidad', function() {
+    var cantidad = $(this).val();
+    var id = $(this).attr('id').replace('plazoF', ''); // Obtén el número de fila
+    var precioUnitario = parseFloat($('#producto' + id + ' option:selected').data('precio')); // Obtiene el precio unitario del producto seleccionado
+    var precioTotal = cantidad * precioUnitario;
 
-
+    // Actualiza el campo Descripcion con el precio total calculado
+    $('#Descripcion' + id).val(precioTotal);
+});
 
     $('#btnGuardar').on('click', function () {
         document.getElementById('action').value = 'guardarOrden';
     });
 });
+
+

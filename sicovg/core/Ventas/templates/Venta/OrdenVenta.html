@@ -30,8 +30,8 @@
                 <div class="col-sm-4">
                     <h5>Datos de Cuenta:</h5>
                     <p class="card-text">Cuenta: <b>{{ cuenta }}</b></p>
-                    <p class="card-text">Id de Cuenta <b>{{ idClientes }}</b></p>
-                    <p class="card-text">Razón Social: <b>{{ Clientes.razonSocial }}</b></p>
+                    <p class="card-text">Id de Cuenta <b>{{ clientes.idClientes }}</b></p>
+                    <p class="card-text">Razón Social: <b>{{ clientes.razonSocial }}</b></p>
                     <p class="card-text">Tipo Cliente <b>{{ Clientes.tipoCliente }}</b></p>
                     <p class="card-text">Representante Legal <b>{{ Clientes.representanteLegal }}</b></p>
                     <p class="card-text">RFC: <b>{{ Clientes.RFC }}</b></p>
@@ -68,12 +68,6 @@
                 <div class="row">
                     <div class="form-group col-md-2">
                     </div>
-                    <div class="form-group col-md-4">
-                        <a class="btn  form-control btn-primary" id="addRow">Adición</a>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <a class="btn form-control btn-success" href="#!" id="duplicarContenido">Duplicar Contenido</a>
-                    </div>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -83,10 +77,10 @@
                         <th style="width: 2%;">#</th>
                         <th style="width: 10%;">Movimiento</th>
                         <th style="width: 18%;">Producto</th>
-                         <th style="width: 18%;">Descricpión</th>
-                        <th style="width: 10%;">Cantidad</th>
-                        <th style="width: 5%;">Precio</th>
+                        <th style="width: 10%;">Precio</th>
+                        <th style="width: 5%;">Cantidad</th>
                         <th style="width: 10%;">Total</th>
+                        <th style="width: 20%;">Comentario</th>
                         <th>X</th>
                     </tr>
                     </thead>
@@ -96,6 +90,9 @@
             </div>
         </div>
         <div class="row">
+             <div class="form-group col-md-4">
+                        <a class="btn  form-control btn-primary" id="addRow">Adición</a>
+                    </div>
             <div class="form-group col-md-3">
                 <input type="submit" value="Enviar Orden" class="form-control btn-success" id="btnGuardar"
                        name="btnGuardar">
