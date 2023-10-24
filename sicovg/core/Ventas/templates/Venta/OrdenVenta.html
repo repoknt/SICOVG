@@ -14,8 +14,8 @@
 {% block content %}
     {#    Card de Control de Búsqueda  #}
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">
+        <div class="card-header col-bluest">
+            <h3 class="card-title ">
                 <i class="fas fa-search"></i>
                 Control de Búsqueda
             </h3>
@@ -29,31 +29,31 @@
             <div class="row">
                 <div class="col-sm-4">
                     <h5>Datos de Cuenta:</h5>
-                    <p class="card-text">Cuenta <b>{{ empresa.cuenta }}</b></p>
-                    <p class="card-text">Id de Cuenta <b>{{ empresa.idCuenta }}</b></p>
-                    <p class="card-text">Razón Social: <b>{{ empresa.razonSocial }}</b></p>
-                    <p class="card-text">Tipo Cliente <b>{{ empresa.tipoCliente }}</b></p>
-                    <p class="card-text">Representante Legal <b>{{ empresa.representanteLegal }}</b></p>
-                    <p class="card-text">RFC: <b>{{ empresa.RFC }}</b></p>
-                    <p class="card-text">Carrier <b>{{ empresa.carrier }}</b></p>
-                    <p class="card-text">Elite <b>{{ empresa.elite }}</b></p>
-                    <p class="card-text">Segmento <b>{{ empresa.segmento }}</b></p>
-                    <p class="card-text">Encargado <b>{{ encargado.get_full_name }}</b></p>
+                    <p class="card-text">Cuenta: <b>{{ cuenta }}</b></p>
+                    <p class="card-text">Id de Cuenta <b>{{ idClientes }}</b></p>
+                    <p class="card-text">Razón Social: <b>{{ Clientes.razonSocial }}</b></p>
+                    <p class="card-text">Tipo Cliente <b>{{ Clientes.tipoCliente }}</b></p>
+                    <p class="card-text">Representante Legal <b>{{ Clientes.representanteLegal }}</b></p>
+                    <p class="card-text">RFC: <b>{{ Clientes.RFC }}</b></p>
+                    <p class="card-text">Carrier <b>{{ Clientes.carrier }}</b></p>
+                    <p class="card-text">Elite <b>{{ Clientes.elite }}</b></p>
+                    <p class="card-text">Segmento <b>{{ Clientes.segmento }}</b></p>
+                    <p class="card-text">Encargado <b>{{ Clientes.get_full_name }}</b></p>
                 </div>
                 <div class="col-sm-4">
                     <h5>Contacto y Entrega:</h5>
-                    <p class="card-text">Email: <b>{{ empresa.email }}</b></p>
-                    <p class="card-text">Telefono Fijo: <b>{{ empresa.telefono1 }}</b></p>
-                    <p class="card-text">Telefono Móvil <b>{{ empresa.telefono2 }}</b></p>
-                    <p class="card-text">Domicilio Fiscal: <b>{{ empresa.domicilioFiscal }}</b></p>
-                    <p class="card-text">Domicilio Entrega: <b>{{ empresa.domicilioEntrega }}</b></p>
-                    <p class="card-text">Personal Autorizado 1: <b>{{ empresa.personaAutorizada1 }}</b></p>
-                    <p class="card-text">Personal Autorizado 2: <b>{{ empresa.personaAutorizada2 }}</b></p>
+                    <p class="card-text">Email: <b>{{ Clientes.email }}</b></p>
+                    <p class="card-text">Telefono Fijo: <b>{{ Clientes.telefono1 }}</b></p>
+                    <p class="card-text">Telefono Móvil <b>{{ Clientes.telefono2 }}</b></p>
+                    <p class="card-text">Domicilio Fiscal: <b>{{ Clientes.domicilioFiscal }}</b></p>
+                    <p class="card-text">Domicilio Entrega: <b>{{ Clientes.domicilioEntrega }}</b></p>
+                    <p class="card-text">Personal Autorizado 1: <b>{{ Clientes.personaAutorizada1 }}</b></p>
+                    <p class="card-text">Personal Autorizado 2: <b>{{ Clientes.personaAutorizada2 }}</b></p>
                 </div>
                 <div class="col-sm-4">
                     <h5>Referencias:</h5>
-                    <p class="card-text">Teléfono Personal Autorizado 1:<b>{{ empresa.telefonoPersonaAutorizada1 }}</b></p>
-                    <p class="card-text">Teléfono Personal Autorizado 2:<b>{{ empresa.telefonoPersonaAutorizada2 }}</b></p>
+                    <p class="card-text">Teléfono Personal Autorizado 1:<b>{{ Clientes.telefonoPersonaAutorizada1 }}</b></p>
+                    <p class="card-text">Teléfono Personal Autorizado 2:<b>{{ Clientes.telefonoPersonaAutorizada2 }}</b></p>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
     <form method="POST" action="." enctype="multipart/form-data">
         <input type="hidden" value="formatoEntrega" name="action" id="action">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header col-bluest">
                 <h3 class="text-center">Orden</h3>
             </div>
             <div>
@@ -82,17 +82,11 @@
                     <tr style="font-size: 15px;">
                         <th style="width: 2%;">#</th>
                         <th style="width: 10%;">Movimiento</th>
-                         <th style="width: 18%;">Equipo</th>
-                        <th style="width: 10%;">Descripción</th>
-                        <th style="width: 5%;">No Serie</th>
-                        <th style="width: 5%;">Color</th>
-                        <th style="width: 15%;">Plan</th>
-                        <th style="width: 5%;">Plazo</th>
-                        <th style="width: 10%;">CE sin IVA</th>
-                        <th style="width: 5%;">Add' On</th>
-                        <th style="width: 5%;">DE</th>
-                        <th style="width: 5%;">AC</th>
-                        <th style="width: 5%;">DM</th>
+                        <th style="width: 18%;">Producto</th>
+                         <th style="width: 18%;">Descricpión</th>
+                        <th style="width: 10%;">Cantidad</th>
+                        <th style="width: 5%;">Precio</th>
+                        <th style="width: 10%;">Total</th>
                         <th>X</th>
                     </tr>
                     </thead>
@@ -102,20 +96,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-3">
-                <input type="submit" value="Formato de Entrega" class="form-control btn btn-primary"
-                       name="formatoEntrega"
-                       id="formatoEntrega">
-            </div>
-            <div class="form-group col-md-3">
-                <input type="submit" value="Formato Rojo" class="form-control btn btn-primary" name="formatoRojo"
-                       id="formatoRojo">
-            </div>
-            <div class="form-group col-md-3">
-                <input type="submit" value="Control de Renovaciones" class="form-control btn btn-primary"
-                       name="controlRenovaciones"
-                       id="controlRenovaciones">
-            </div>
             <div class="form-group col-md-3">
                 <input type="submit" value="Enviar Orden" class="form-control btn-success" id="btnGuardar"
                        name="btnGuardar">
