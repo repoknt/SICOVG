@@ -5,7 +5,6 @@ var i = 0;
 var selectEquipos = "";
 $(function () {
     selectEquipos = RProductos();
-    // Definición de tabla ordenes
     tblOrdenes = $('#data').DataTable({
         "scrollX": true,
         autoWidth: false,
@@ -77,16 +76,16 @@ $(function () {
                     return input;
                 },
             },
-{
-    targets: [-4],
-    class: 'text-center',
-    orderable: false,
-    render: function (data, type, row, i) {
-        if (data) {
-            var input = '<input type="number" value="' + data + '" min="0" style="padding: 0px;" class="form-control input-sm cantidad" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
-        } else {
-            var input = '<input type="number" value="" min="0" style="padding: 0px;" class="form-control input-sm cantidad" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
-        }
+            {
+                targets: [-4],
+                 class: 'text-center',
+                orderable: false,
+                render: function (data, type, row, i) {
+                       if (data) {
+                           var input = '<input type="number" value="' + data + '" min="0" style="padding: 0px;" class="form-control input-sm cantidad" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
+                       } else {
+                           var input = '<input type="number" value="" min="0" style="padding: 0px;" class="form-control input-sm cantidad" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
+             }
         return input;
     },
 },
@@ -137,7 +136,6 @@ $(function () {
         });
     }).draw();
 
-    // Boton para envio de documentos
     $('#button').click(function () {
         var table = document.getElementById("data");
         alert(table.rows.length - 1);
@@ -145,13 +143,11 @@ $(function () {
         return false;
     });
 
-    // Boton de agregar Fila
     $('#addRow').on('click', function (e) {
         e.preventDefault();
         tblOrdenes.row.add({}).draw();
     });
 
-    // Eliminar fila
     $('#data tbody')
         .on('click', 'a[rel="delete"]', function () {
             var tr = tblOrdenes.cell($(this).closest('td, li')).index();
@@ -187,8 +183,6 @@ $(function () {
                 });
         });
 
-
-//Funcion que recupera los registros de la tabla EQUIPOS
     function RProductos() {
         var data = {action: 'RProductos'};
         $.post(window.location.pathname, data, function (res) {
@@ -198,7 +192,6 @@ $(function () {
         return [];
     }
 
-//funcion que muestra los registros en un select
     function Productos(id) {
     var Productos = '<select class="form-group-sm producto-select" style="font-size: 15px; margin: 1px;"  name="producto' + id + '" id="producto' + id + '">';
     for (const clave in selectEquipos) {
@@ -216,11 +209,9 @@ $(document).on('change', '.producto-select', function() {
 });
     $(document).on('change', '.cantidad', function() {
     var cantidad = $(this).val();
-    var id = $(this).attr('id').replace('plazoF', ''); // Obtén el número de fila
-    var precioUnitario = parseFloat($('#producto' + id + ' option:selected').data('precio')); // Obtiene el precio unitario del producto seleccionado
+    var id = $(this).attr('id').replace('plazoF', '');
+    var precioUnitario = parseFloat($('#producto' + id + ' option:selected').data('precio'));
     var precioTotal = cantidad * precioUnitario;
-
-    // Actualiza el campo Descripcion con el precio total calculado
     $('#Descripcion' + id).val(precioTotal);
 });
 

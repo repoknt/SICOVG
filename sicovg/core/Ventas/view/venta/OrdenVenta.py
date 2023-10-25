@@ -42,7 +42,34 @@ class NuevaVenta(LoginRequiredMixin, TemplateView):
             data = []
             for i in Inventario.objects.all().order_by('NombresProducto'):
                 data.append(i.toJSON())
-        elif action == 'guardarOrden':
-
+        else:
             data['error'] = 'No se ha seleccionado alguna acción'
         return JsonResponse(data, safe=False)
+
+    def guardarOrden(self, request, tamanio):
+        for i in range(0, int(tamanio)):
+            if request.POST['mov' + str(i)] == 'ADICION':
+                folioGenerado = self.guardarAdicion(request.user, equipo, color, plan, plazo, CE, addon, DE, AC, DM,
+                                                    'PROCESO', folio)
+            elif request.POST['mov' + str(i)] == 'RECHAZO DE ALMACEN':
+                rechazoDeAlmacen = self.cambioEquipo(dn, equipo, color, plan, plazo, CE, addon, DE, AC, DM)
+                # redireccionar a la vista de EDITAR EXPEDIENTE
+        if rechazoDeAlmacen:
+            return redirect('/erp/empresa/orden/updateExpediente/{}/'.format(rechazoDeAlmacen.folio))
+        else:
+            cambio = EmpresaAsignada.objects.get(empresa_id=str(self.cuenta))
+            cambio.estatus = 'ORDEN ABIERTA'
+            cambio.save()
+            return redirect('/erp/empresa/orden/expediente/{}/'.format(folioGenerado.folio))
+
+        # Comprobar el plan de los equipos
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Detalle De Cuenta Orden'
+        context['entity'] = 'Empresa'
+        context['action'] = 'add'
+        context['encargado'] = User.objects.get(pk=self.encargado.toJSON()['empleado']['id'])
+        context['empresa'] = Empresa.objects.get(cuenta=self.cuentaOrden)
+        return context
+
