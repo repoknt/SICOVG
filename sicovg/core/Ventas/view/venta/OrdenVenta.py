@@ -15,7 +15,7 @@ from core.Clientes.forms import ClienteForm
 from core.principales.models import Inventario
 from core.principales.models import DetalleVenta
 from core.login.models import User
-from django.utils import timezone
+from django.shortcuts import render
 
 
 class NuevaVenta(LoginRequiredMixin, TemplateView):
@@ -27,6 +27,7 @@ class NuevaVenta(LoginRequiredMixin, TemplateView):
         self.idCliente = self.Clientes.toJSON()['cuenta']
         self.encargado = Clientes.objects.get(cuenta=self.idCliente)
         return super().dispatch(request, *args, **kwargs)
+
     def get_object(self, cuenta):
         try:
             instance = Clientes.objects.get(cuenta=cuenta)
@@ -34,6 +35,28 @@ class NuevaVenta(LoginRequiredMixin, TemplateView):
         except Clientes.DoesNotExist:
             raise Http404("Cliente no encontrado")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Obtén el objeto Clientes y agrégalo al contexto
+        cuenta = kwargs['cuenta']
+        cliente = self.get_object(cuenta)
+
+        # Acceder a los campos específicos del objeto Clientes
+        context['idCliente'] = cliente.idCliente
+        context['razonSocial'] = cliente.razonSocial
+        context['cuenta'] = cliente.cuenta
+        context['email'] = cliente.email
+        context['RFC'] = cliente.RFC
+        context['calle'] = cliente.calle
+        context['noExt'] = cliente.noExt
+        context['noInt'] = cliente.noInt
+        context['codigoPostal'] = cliente.codigoPostal
+        context['municipio'] = cliente.municipio
+        context['estado'] = cliente.estado
+        context['colonia'] = cliente.colonia
+        context['telefono'] = cliente.telefono
+
+        return context
 
     def post(self, request, *args, **kwargs):
         data = {}
@@ -45,31 +68,3 @@ class NuevaVenta(LoginRequiredMixin, TemplateView):
         else:
             data['error'] = 'No se ha seleccionado alguna acción'
         return JsonResponse(data, safe=False)
-
-    def guardarOrden(self, request, tamanio):
-        for i in range(0, int(tamanio)):
-            if request.POST['mov' + str(i)] == 'ADICION':
-                folioGenerado = self.guardarAdicion(request.user, equipo, color, plan, plazo, CE, addon, DE, AC, DM,
-                                                    'PROCESO', folio)
-            elif request.POST['mov' + str(i)] == 'RECHAZO DE ALMACEN':
-                rechazoDeAlmacen = self.cambioEquipo(dn, equipo, color, plan, plazo, CE, addon, DE, AC, DM)
-                # redireccionar a la vista de EDITAR EXPEDIENTE
-        if rechazoDeAlmacen:
-            return redirect('/erp/empresa/orden/updateExpediente/{}/'.format(rechazoDeAlmacen.folio))
-        else:
-            cambio = EmpresaAsignada.objects.get(empresa_id=str(self.cuenta))
-            cambio.estatus = 'ORDEN ABIERTA'
-            cambio.save()
-            return redirect('/erp/empresa/orden/expediente/{}/'.format(folioGenerado.folio))
-
-        # Comprobar el plan de los equipos
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Detalle De Cuenta Orden'
-        context['entity'] = 'Empresa'
-        context['action'] = 'add'
-        context['encargado'] = User.objects.get(pk=self.encargado.toJSON()['empleado']['id'])
-        context['empresa'] = Empresa.objects.get(cuenta=self.cuentaOrden)
-        return context
-

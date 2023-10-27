@@ -69,9 +69,9 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row, i) {
                     if (data) {
-                        var input = '<input type="text" readonly  value="' + data + '" style="padding: 0px;" class="form-control input-sm" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
+                        var input = '<input type="text" readonly  value="' + data + '" style="padding: 0px;" class="form-control input-sm" name="Precio' + i.row + '" id="Precio' + i.row + '">';
                     } else {
-                        var input = '<input type="text" readonly value="" style="padding: 0px;" class="form-control input-sm" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
+                        var input = '<input type="text" readonly value="" style="padding: 0px;" class="form-control input-sm" name="Precio' + i.row + '" id="Precio' + i.row + '">';
                     }
                     return input;
                 },
@@ -82,9 +82,9 @@ $(function () {
                 orderable: false,
                 render: function (data, type, row, i) {
                        if (data) {
-                           var input = '<input type="number" value="' + data + '" min="0" style="padding: 0px;" class="form-control input-sm cantidad" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
+                           var input = '<input type="number" value="' + data + '" min="0" style="padding: 0px;" class="form-control input-sm cantidad" name="Precio' + i.row + '" id="Precio' + i.row + '">';
                        } else {
-                           var input = '<input type="number" value="" min="0" style="padding: 0px;" class="form-control input-sm cantidad" name="plazoF' + i.row + '" id="plazoF' + i.row + '">';
+                           var input = '<input type="number" value="" min="0" style="padding: 0px;" class="form-control input-sm cantidad" name="Precio' + i.row + '" id="Precio' + i.row + '">';
              }
         return input;
     },
@@ -165,8 +165,8 @@ $(function () {
                     for (var i = tr.row + 1; i <= numFilas; i++) {
                         document.getElementById("mov" + i).setAttribute("name", "mov" + indice);
                         document.getElementById("mov" + i).setAttribute("id", "mov" + indice);
-                        document.getElementById("dn" + i).setAttribute("name", "dn" + indice);
-                        document.getElementById("dn" + i).setAttribute("id", "dn" + indice);
+                        document.getElementById("Precio" + i).setAttribute("name", "Precio" + indice);
+                        document.getElementById("Precio" + i).setAttribute("id", "Precio" + indice);
                         document.getElementById("Descripcion" + i).setAttribute("name", "Descripcion" + indice);
                         document.getElementById("Descripcion" + i).setAttribute("id", "Descripcion" + indice);
                         document.getElementById("equipo" + i).setAttribute("name", "equipo" + indice);
@@ -205,11 +205,11 @@ $(document).on('change', '.producto-select', function() {
     var precioUnitario = selectedOption.data('precio');
     var id = $(this).attr('id').replace('producto', '');
     var totalP = // Obtén el número de fila
-    $('#plazoF' + id).val(precioUnitario);
+    $('#Precio' + id).val(precioUnitario);
 });
     $(document).on('change', '.cantidad', function() {
     var cantidad = $(this).val();
-    var id = $(this).attr('id').replace('plazoF', '');
+    var id = $(this).attr('id').replace('Precio', '');
     var precioUnitario = parseFloat($('#producto' + id + ' option:selected').data('precio'));
     var precioTotal = cantidad * precioUnitario;
     $('#Descripcion' + id).val(precioTotal);

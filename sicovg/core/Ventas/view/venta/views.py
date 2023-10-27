@@ -50,11 +50,15 @@ class Ventaview(LoginRequiredMixin, FormView):
                     'colonia': Cliente.colonia,
                     'email': Cliente.email,
                     'telefono': Cliente.telefono,
+                    'inventario': []  # Initialize an empty list for inventory items
                 }
+
+                for i in Inventario.objects.all().order_by('NombresProducto'):
+                    data['inventario'].append(i.toJSON())  # Append inventory items to the list
             else:
                 data['error'] = 'No ha ingresado a ninguna opción'
         except Clientes.DoesNotExist:
-            data['error'] = 'No hay coincidencias'
+                data['error'] = 'No hay coincidencias'
         except Exception as e:
             data['error'] = str(e)
         return JsonResponse(data, safe=False)
@@ -63,3 +67,4 @@ class Ventaview(LoginRequiredMixin, FormView):
         context['title'] = 'Ventas'
         context['name'] = 'Cliente'
         return context
+
