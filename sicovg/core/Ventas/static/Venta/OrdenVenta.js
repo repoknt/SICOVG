@@ -1,8 +1,8 @@
 var validarBotones = 0;
 var tblOrdenes;
-var contador = 0;
-var i = 0;
+var contadorFilas = 0;
 var selectEquipos = "";
+var valoresGenerados = {};
 $(function () {
     selectEquipos = RProductos();
     tblOrdenes = $('#data').DataTable({
@@ -50,7 +50,7 @@ $(function () {
                         }
                         input = '<input type="text" readonly  style="padding: 0px;font-size: 15px;width: 170px;" value="' + data + '" class="form-control" name="mov' + i.row + '" id="mov' + i.row + '">';
                     } else {
-                        input = '<input type="text" readonly style="padding: 0px;font-size: 15px;width: 170px;" value="            pendiente" class="form-control" name="mov' + i.row + '" id="mov' + i.row + '">';
+                        input = '<input type="text" readonly style="padding: 0px;font-size: 15px;width: 170px;" value="Pendiente" class="form-control" name="mov' + i.row + '" id="mov' + i.row + '">';
                     }
                     return input;
                 },
@@ -106,14 +106,13 @@ $(function () {
                 targets: [-2],
                 class: 'text-center',
                 orderable: false,
-            render: function (data, type, row, i) {
-                    if (data) {
-                        var input = '<input type="text"   value="' + data + '" style="padding: 0px;" class="form-control input-sm" name="Descripcion' + i.row + '" id="Descripcion' + i.row + '">';
-                    } else {
-                        var input = '<input type="text"   value="" style="padding: 0px;" class="form-control input-sm" name="Descripcion' + i.row + '" id="Descripcion' + i.row + '">';
-                    }
-                    return input;
-                },
+        render: function (data, type, row, i) {
+    var id = i.row;
+    var comentario = valoresGenerados[id] ? valoresGenerados[id].nombreProducto : '';
+    var input = '<input type="text" value="' + comentario + '" style="padding: 0px;" class="form-control input-sm comentario" data-id="' + id + '" name="Comentario' + id + '" id="Comentario' + id + '">';
+    return input;
+},
+
             },
             {
                 targets: [-1],
@@ -138,51 +137,64 @@ $(function () {
 
     $('#button').click(function () {
         var table = document.getElementById("data");
-        alert(table.rows.length - 1);
+        alert(table.rows.length - 0);
         var data = tblOrdenes.$('input, select').serialize();
         return false;
     });
 
-    $('#addRow').on('click', function (e) {
+  // Declara una variable para mantener el conteo de filas
+var contadorFilas = 0;
+$('#addRow').on('click', function (e) {
         e.preventDefault();
+        // Agrega una nueva fila a la tabla
         tblOrdenes.row.add({}).draw();
+
+        // Incrementa el contador de filas
+        contadorFilas++;
+
+        // Inicializa los valores para la nueva fila
+        var id = contadorFilas;
+        valoresGenerados[id] = {
+            nombreProducto: '',
+            precioTotal: 0,
+            precioUnitario: 0,
+            comentario: ''
+        };
+
+        console.log('Número total de filas: ' + contadorFilas);
     });
 
-    $('#data tbody')
-        .on('click', 'a[rel="delete"]', function () {
-            var tr = tblOrdenes.cell($(this).closest('td, li')).index();
-            var orden = tblOrdenes.row(tr.row).data();
-            alert_action('Notificación', '¿Estas seguro de eliminar está fila?',
-                function () {
-                    if (orden.movimiento === 'RENOVACION') {
-                        var data = {action: "removeOrden", id: orden.idOrden}
-                        $.post(window.location.pathname, data, function (res) {
-                        });
-                    }
-                    tblOrdenes.row(tr.row).remove().draw();
-                    var numFilas = tblOrdenes.rows().count();
-                    var indice = tr.row;
-                    for (var i = tr.row + 1; i <= numFilas; i++) {
-                        document.getElementById("mov" + i).setAttribute("name", "mov" + indice);
-                        document.getElementById("mov" + i).setAttribute("id", "mov" + indice);
-                        document.getElementById("Precio" + i).setAttribute("name", "Precio" + indice);
-                        document.getElementById("Precio" + i).setAttribute("id", "Precio" + indice);
-                        document.getElementById("Descripcion" + i).setAttribute("name", "Descripcion" + indice);
-                        document.getElementById("Descripcion" + i).setAttribute("id", "Descripcion" + indice);
-                        document.getElementById("equipo" + i).setAttribute("name", "equipo" + indice);
-                        document.getElementById("equipo" + i).setAttribute("id", "equipo" + indice);
-                        document.getElementById("color" + i).setAttribute("name", "color" + indice);
-                        document.getElementById("color" + i).setAttribute("id", "color" + indice);
-                        document.getElementById("plan" + i).setAttribute("name", "plan" + indice);
-                        document.getElementById("plan" + i).setAttribute("id", "plan" + indice);
-                        indice++;
-                        tr.row++;
-                    }
-                }, function () {
+    $('#data tbody').on('click', 'a[rel="delete"]', function () {
+        var tr = tblOrdenes.cell($(this).closest('td, li')).index();
+        var id = tr.row; // Obtén el ID de la fila antes de eliminarla
+        var orden = tblOrdenes.row(tr.row).data();
+        alert_action('Notificación', '¿Estás seguro de eliminar esta fila?',
+            function () {
+                // Restablece el contador de filas después de eliminar una fila
+                contadorFilas--;
 
-                });
-        });
 
+                tblOrdenes.row(tr.row).remove().draw();
+
+                // Actualiza los elementos del DOM con los nuevos índices
+                for (var i = id; i < contadorFilas; i++) {
+                    document.getElementById("mov" + (i + 1)).setAttribute("name", "mov" + i);
+                    document.getElementById("mov" + (i + 1)).setAttribute("id", "mov" + i);
+                    document.getElementById("Precio" + (i + 1)).setAttribute("name", "Precio" + i);
+                    document.getElementById("Precio" + (i + 1)).setAttribute("id", "Precio" + i);
+                    document.getElementById("Descripcion" + (i + 1)).setAttribute("name", "Descripcion" + i);
+                    document.getElementById("Descripcion" + (i + 1)).setAttribute("id", "Descripcion" + i);
+                    document.getElementById("Productos" + (i + 1)).setAttribute("name", "Productos" + i);
+                    document.getElementById("Productos" + (i + 1)).setAttribute("id", "Productos" + i);
+                    document.getElementById("Comentario" + (i + 1)).setAttribute("name", "Comentario" + i);
+                    document.getElementById("Comentario" + (i + 1)).setAttribute("id", "Comentario" + i);
+                    document.getElementById("plan" + (i + 1)).setAttribute("name", "plan" + i);
+                    document.getElementById("plan" + (i + 1)).setAttribute("id", "plan" + i);
+                }
+            }, function () {
+
+            });
+    });
     function RProductos() {
         var data = {action: 'RProductos'};
         $.post(window.location.pathname, data, function (res) {
@@ -192,14 +204,19 @@ $(function () {
         return [];
     }
 
-    function Productos(id) {
+   function Productos(id) {
     var Productos = '<select class="form-group-sm producto-select" style="font-size: 15px; margin: 1px;"  name="producto' + id + '" id="producto' + id + '">';
     for (const clave in selectEquipos) {
-        Productos += '<option data-precio="' + selectEquipos[clave].PrecioUnitario + '">' + selectEquipos[clave].NombresProducto + '</option>';
+        var nombreProducto = selectEquipos[clave].NombresProducto;
+        var precioProducto = selectEquipos[clave].PrecioUnitario;
+        Productos += '<option data-precio="' + precioProducto + '">' + nombreProducto + '</option>';
+        console.log('Nombre del producto: ' + nombreProducto);
     }
+
     Productos += '</select>';
     return Productos;
 }
+
 $(document).on('change', '.producto-select', function() {
     var selectedOption = $(this).find(':selected');
     var precioUnitario = selectedOption.data('precio');
@@ -207,13 +224,37 @@ $(document).on('change', '.producto-select', function() {
     var totalP = // Obtén el número de fila
     $('#Precio' + id).val(precioUnitario);
 });
-    $(document).on('change', '.cantidad', function() {
-    var cantidad = $(this).val();
-    var id = $(this).attr('id').replace('Precio', '');
-    var precioUnitario = parseFloat($('#producto' + id + ' option:selected').data('precio'));
-    var precioTotal = cantidad * precioUnitario;
-    $('#Descripcion' + id).val(precioTotal);
+ $(document).on('change', '.comentario', function() {
+    var id = $(this).data('id');
+    var nombreProducto = valoresGenerados[id] ? valoresGenerados[id].nombreProducto : '';
+    console.log('Nombre del producto para la fila ' + id + ': ' + nombreProducto);
 });
+
+
+ // Crea un objeto para almacenar los valores generados
+var valoresGenerados = {};
+
+ $(document).on('change', '.cantidad', function () {
+        var cantidad = $(this).val();
+        var id = $(this).attr('id').replace('Precio', '');
+        var nombreProducto = $('#producto' + id + ' option:selected').text();
+        var precioUnitario = parseFloat($('#producto' + id + ' option:selected').data('precio'));
+        var precioTotal = cantidad * precioUnitario;
+        $('#Descripcion' + id).val(precioTotal);
+
+
+
+        valoresGenerados[id] = {
+            movimiento: $('#mov'+id).val(),
+            nombreProducto: nombreProducto,
+            precioTotal: precioTotal,
+            precioUnitario: precioUnitario,
+            comentario: $('#Comentario' + id).val(),
+        };
+
+        console.log(' ID de fila: ' + id + '\nMovimiento: ' + valoresGenerados[id].movimiento + ', \nNombre del producto: ' + nombreProducto + ', \nPrecio total: ' + precioTotal + ', \nPrecio unitario: ' + precioUnitario + ', \nComentario: ' + valoresGenerados[id].comentario + ', \nCantidad: ' + cantidad);
+    });
+
 
     $('#btnGuardar').on('click', function () {
         document.getElementById('action').value = 'guardarOrden';
